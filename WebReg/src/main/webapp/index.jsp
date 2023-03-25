@@ -43,7 +43,7 @@ function updateOutput(){
 				<td>Phone</td>
 				<td><input type="text" name="phone"></td>
 			</tr>-->
-		<input type="button" value="register">
+		<input type="submit" value="register">
 	</form>
 	<div class="drops">
 		<div class="drop drop-1"></div>
