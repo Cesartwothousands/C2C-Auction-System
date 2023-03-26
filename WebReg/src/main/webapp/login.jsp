@@ -5,26 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Login Page</title>
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./style_login.css">
 </head>
 <body>
 <div class="container">
 	<form action="Login" method="post">
 		<table>
+			<p>Welcome To Auction System</p>
 			<tr>
-				<td for="inputField">User Email</td>
-				<td><input type="text" id="email_inputField" name="email" ></td>
+				<!--td for="inputField" style="color: white;">User Email</td-->
+				<input type="text" id="email_inputField" name="email" placeholder="email">
 			</tr>
 			<tr>
-				<td for="inputField">Password</td>
-				<td><input type="password" id="password_inputField" name="password" ></td>
+				<!--td for="inputField">Password</td-->
+				<input type="password" id="password_inputField" name="password" placeholder="password">
 			</tr>
 			<tr>
-                <td colspan="2">
-                    <div style="text-align: center;">
-                        <input type="submit" value="login">
-                    </div>
-                </td>
+				<input type="submit" value="login">
 			</tr>
 		</table>
 	</form>

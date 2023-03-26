@@ -54,7 +54,7 @@
 							oninput="validateNameLength()">
 					</tr>
 					<tr>
-						<div id="password_error" style="color: red;"> </div>
+						<div id="password_error" style="color: red;"></div>
 
 						<input type="password" id="password_inputField" name="password" placeholder="Password"
 							oninput="validatePasswordLength()">
