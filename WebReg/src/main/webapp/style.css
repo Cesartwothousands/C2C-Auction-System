@@ -63,11 +63,11 @@ form input {
   transition: all 0.2s ease-in-out;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
-form input:hover {
+form input:hover form div:hover{
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
 }
-form input[type=email]:focus, form input[type=password]:focus {
+form input[type=email]:focus, form input[type=password]:focus form input[type=text]:focus{
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
 }

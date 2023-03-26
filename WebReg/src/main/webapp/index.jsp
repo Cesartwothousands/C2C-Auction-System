@@ -42,22 +42,23 @@
 			<form action="Register" method="post">
 				<table>
 					<label for="container">
-						<h2>
+						<p>
 							Welcome To Auction System
-						</h2>
+						</p>
 					</label>
 
 					<tr>
+						<div id="name_error" style="color: #ff0000;"> </div>
+
 						<input type="text" id="name_inputField" name="name" placeholder="Name"
 							oninput="validateNameLength()">
-						<div id="name_error" style="color: red;"> </div>
 					</tr>
 					<tr>
+						<div id="password_error" style="color: red;"> </div>
+
 						<input type="password" id="password_inputField" name="password" placeholder="Password"
 							oninput="validatePasswordLength()">
 
-
-						<div id="password_error" style="color: red;"> </div>
 					</tr>
 
 					<tr>
