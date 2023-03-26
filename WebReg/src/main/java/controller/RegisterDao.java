@@ -1,3 +1,7 @@
+package controller;
+
+import model.Member;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -6,7 +10,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 public class RegisterDao {
-    private String DB_password = "3042127359@qq.com";
+    private final DBConfig dbConfig=new DBConfig();
 
     public void loadDriver(String dbDriver)
     {
@@ -21,8 +25,8 @@ public class RegisterDao {
         Connection con = null;
         try {
             con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/mydb",
-                    "root", DB_password);
+                    dbConfig.getUrl(),
+                    dbConfig.getUser(), dbConfig.getPassword());
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -31,7 +35,7 @@ public class RegisterDao {
     }
 
     public String insert(Member member) {
-        String dbdriver = "com.mysql.cj.jdbc.Driver";
+        String dbdriver = dbConfig.getDbdriver();
         loadDriver(dbdriver);
         String result;
 

@@ -1,3 +1,8 @@
+package view;
+
+import controller.LoginDao;
+import model.Member;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Login")
 public class Login extends HttpServlet {
-    private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,6 +43,10 @@ public class Login extends HttpServlet {
         Member member=new Member(null, password, email);
         LoginDao rdao=new LoginDao();
         Member result=rdao.query(member);
-        response.getWriter().println("Find the user");
+        if(result!=null){
+            response.getWriter().println("Find the user");
+        }else {
+            response.getWriter().println("Not found");
+        }
     }
 }

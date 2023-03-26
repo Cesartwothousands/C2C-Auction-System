@@ -1,4 +1,7 @@
+package view;
 
+import controller.RegisterDao;
+import model.Member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

@@ -1,7 +1,9 @@
-import java.sql.*;
+package controller;
 
+import java.sql.*;
+import model.Member;
 public class LoginDao {
-    private String DB_password = "Yours";
+    private final DBConfig dbConfig=new DBConfig();
 
     public void loadDriver(String dbDriver)
     {
@@ -16,8 +18,8 @@ public class LoginDao {
         Connection con = null;
         try {
             con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/mydb",
-                    "root", DB_password);
+                    dbConfig.getUrl(),
+                    dbConfig.getUser(), dbConfig.getPassword());
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -26,26 +28,20 @@ public class LoginDao {
     }
 
     public Member query(Member member) {
-        String dbdriver = "com.mysql.jdbc.Driver";
+        String dbdriver = dbConfig.getDbdriver();
         loadDriver(dbdriver);
         Connection con = getConnection();
-        String sql = "select count(*) from 'mydb'.'end_user' where email=? and password=?";
+        String sql = "select name from mydb.end_user where email=? and password=?";
         Member result=null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, member.getEmail());
             ps.setString(2, member.getPassword());
             ResultSet rs =ps.executeQuery();
-            int size =0;
-            if (rs != null)
-            {
-                rs.last();    // moves cursor to the last row
-                size = rs.getRow(); // get row id
-            }
-            if(size==1){
+            if(rs!=null&&rs.next()){
+                //index start from 1
+                member.setUname(rs.getString(1));
                 result=member;
-            }else if(size>1){
-                throw new Exception("Multiple user found");
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
