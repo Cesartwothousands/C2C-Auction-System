@@ -14,13 +14,13 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class Register
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Logout")
+public class Logout extends HttpServlet {
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Logout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +30,10 @@ public class Login extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.sendRedirect("login.jsp");
+        HttpSession session=request.getSession(false);
+        String n=(String)session.getAttribute("email");
+        request.setAttribute("email", n);
+        request.getRequestDispatcher("logout.jsp").forward(request, response);
     }
 
     /**
@@ -38,18 +41,8 @@ public class Login extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // String uid = request.getParameter("email");
-        String password=request.getParameter("password");
-        String email=request.getParameter("email");
-        // String phone=request.getParameter("phone");
-        Member member=new Member(null, password, email);
-        LoginDao rdao=new LoginDao();
-        Member result=rdao.query(member);
-        if(result!=null){
-            HttpSession session=request.getSession();
-            session.setAttribute("email",result.getEmail());
-            response.sendRedirect("Logout");
-        }else {
-            response.getWriter().println("Not found");
-        }
+        HttpSession session=request.getSession();
+        session.invalidate();
+        response.sendRedirect("login.jsp");
     }
 }
