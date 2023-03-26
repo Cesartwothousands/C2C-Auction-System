@@ -14,7 +14,7 @@ body {
 form {
   background: rgba(255, 255, 255, 0.3);
   padding: 3em;
-  height: 320px;
+  height: 450px;
   border-radius: 20px;
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -30,7 +30,7 @@ form p {
   font-weight: 500;
   color: #fff;
   opacity: 0.7;
-  font-size: 1.4rem;
+  font-size: 2rem;
   margin-top: 0;
   margin-bottom: 60px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -83,7 +83,7 @@ form input[type=password]:focus form input[type=text]:focus {
 form input[type=submit] {
   margin-top: 10px;
   width: 150px;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 form input[type=submit]:hover {
@@ -115,6 +115,7 @@ form:hover {
 ::placeholder {
   font-family: Montserrat, sans-serif;
   font-weight: 400;
+  font-size: 15px;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
