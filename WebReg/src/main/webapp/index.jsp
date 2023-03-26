@@ -73,7 +73,10 @@
 
 					<tr>
 						<input type="submit" value="Register">
+
+						<p class="link"><a href="login.jsp">You already have an account?</a></p>
 					</tr>
+
 				</table>
 
 			</form>
