@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class LoginDao {
-    private String DB_password = "135790";
+    private String DB_password = "Yours";
 
     public void loadDriver(String dbDriver)
     {
@@ -35,7 +35,6 @@ public class LoginDao {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, member.getEmail());
             ps.setString(2, member.getPassword());
-            //ps.setInt(1, (int)Long.parseLong(member.getPhone())%1000000);
             ResultSet rs =ps.executeQuery();
             int size =0;
             if (rs != null)

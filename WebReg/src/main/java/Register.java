@@ -34,14 +34,25 @@ public class Register extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // String uid = request.getParameter("email");
-        String uname=request.getParameter("uname");
+
+        String uname=request.getParameter("name");
         String password=request.getParameter("password");
         String email=request.getParameter("email");
-        // String phone=request.getParameter("phone");
+
         Member member=new Member(uname, password, email);
         RegisterDao rdao=new RegisterDao();
-        String result=rdao.insert(member);
+        String result;
+
+        if(uname=="" || password=="" || email==""){
+            result="Null values are not allowed!";
+        }else if(uname.length()>16){
+            result="Length of username should not longer than 16 characters!";
+        }else if(password.length()<6){
+            result="Length of username should not shorter than 6 characters!";
+        }else{
+            result=rdao.insert(member);
+        }
+
         response.getWriter().println(result);
     }
 }
