@@ -40,19 +40,20 @@
 	<body>
 		<div class="container">
 			<form action="Register" method="post">
-				<table>
-					<label for="container">
-						<p>
-							Welcome To Auction System
-						</p>
-					</label>
+				<h2>
+					Welcome To Auction System
+				</h2>
 
+				<table>
 					<tr>
 						<div id="name_error" style="color: #ff0000;"> </div>
 
 						<input type="text" id="name_inputField" name="name" placeholder="Name"
 							oninput="validateNameLength()">
 					</tr>
+
+					<br>
+
 					<tr>
 						<div id="password_error" style="color: red;"></div>
 
@@ -61,19 +62,19 @@
 
 					</tr>
 
+					<br>
+
 					<tr>
 						<input type="email" name="email" placeholder="Email">
 					</tr>
+
+
 					<br>
+
 					<tr>
 						<input type="submit" value="Register">
 					</tr>
 				</table>
-
-
-				<!--div id="name_outputField" >Limited in 16 characters</div-->
-
-				<!--<div id="password_outputField" >Longer than 6 characters</div>-->
 
 			</form>
 
