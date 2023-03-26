@@ -1,57 +1,89 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
- pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	<!DOCTYPE html>
+	<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Register Page</title>
+		<link rel="stylesheet" href="./style.css">
+	</head>
+
 	<meta charset="UTF-8">
-	<title>My register Form</title>
-	<link rel="stylesheet" href="./style.css">
+	<title>Register Page</title>
 
-</head>
-<head>
-<meta charset="UTF-8">
-<title>Register Page</title>
+	<script>
+		function validateNameLength() {
+			var nameInput = document.getElementById('name_inputField');
+			var nameError = document.getElementById("name_error");
+			if (nameInput.value.length > 16) {
+				nameError.textContent = "Shorter than 16 characters!";
+			} else {
+				nameError.textContent = "";
+			}
+		}
+	</script>
 
-<script>
-function updateOutput(){
-    var name = document.getElementById('name_inputField').value;
-    var password = document.getElementById('password_inputField').value;
+	<script>
+		function validatePasswordLength() {
+			var passwordInput = document.getElementById("password_inputField");
+			var passwordError = document.getElementById("password_error");
+			if (passwordInput.value.length < 6 && passwordInput.value.length > 0) {
+				passwordError.textContent = "Longer than 6 characters!";
+			} else {
+				passwordError.textContent = "";
+			}
+		}
+	</script>
 
-    if (name.length > 16) {
-        //document.getElementById('name_outputField').innerHTML = "Please register as required";
-		alert("Your name shouldn't exceed 16 characters!");
-    }
-    if (password.length < 6 && password.length >0 ) {
-        //document.getElementById('password_outputField').innerHTML = "Please register as required";
-		alert("Your password should longer than 6 characters!");
-    }
+	</head>
 
-}
-</script>
+	<body>
+		<div class="container">
+			<form action="Register" method="post">
+				<table>
+					<label for="container">
+						<h2>
+							Welcome To Auction System
+						</h2>
+					</label>
 
-</head>
-<body>
-<div class="container">
-	<form action="Register" method="post">
-		<p>Welcome To Auction System</p>
-		<input type="text" id="name_inputField" name="name" placeholder="Name" oninput="updateOutput()">
-		<!--div id="name_outputField" >Limited in 16 characters</div-->
-		<input type="password" id="password_inputField" name="password" placeholder="Password" oninput="updateOutput()">
-		<!--<div id="password_outputField" >Longer than 6 characters</div>-->
-		<input type="email" name="email" placeholder="Email">
-			<!--<tr>
-				<td>Phone</td>
-				<td><input type="text" name="phone"></td>
-			</tr>-->
-		<input type="submit" value="register">
-	</form>
-	<div class="drops">
-		<div class="drop drop-1"></div>
-		<div class="drop drop-2"></div>
-		<div class="drop drop-3"></div>
-		<div class="drop drop-4"></div>
-		<div class="drop drop-5"></div>
-	</div>
-</div>
-</body>
-</html>
+					<tr>
+						<input type="text" id="name_inputField" name="name" placeholder="Name"
+							oninput="validateNameLength()">
+						<div id="name_error" style="color: red;"> </div>
+					</tr>
+					<tr>
+						<input type="password" id="password_inputField" name="password" placeholder="Password"
+							oninput="validatePasswordLength()">
+
+
+						<div id="password_error" style="color: red;"> </div>
+					</tr>
+
+					<tr>
+						<input type="email" name="email" placeholder="Email">
+					</tr>
+					<br>
+					<tr>
+						<input type="submit" value="Register">
+					</tr>
+				</table>
+
+
+				<!--div id="name_outputField" >Limited in 16 characters</div-->
+
+				<!--<div id="password_outputField" >Longer than 6 characters</div>-->
+
+			</form>
+
+			<div class="drops">
+				<div class="drop drop-1"></div>
+				<div class="drop drop-2"></div>
+				<div class="drop drop-3"></div>
+				<div class="drop drop-4"></div>
+				<div class="drop drop-5"></div>
+			</div>
+		</div>
+	</body>
+
+	</html>
