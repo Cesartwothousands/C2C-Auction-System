@@ -1,2 +1,4 @@
-package view;public class Sell {
+package view;
+
+public class Sell {
 }

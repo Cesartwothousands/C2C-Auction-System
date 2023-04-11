@@ -31,8 +31,8 @@ public class Logout extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         HttpSession session=request.getSession(false);
-        String n=(String)session.getAttribute("email");
-        request.setAttribute("email", n);
+        Member n=(Member)session.getAttribute("Member");
+        request.setAttribute("email", n.getEmail());
         request.getRequestDispatcher("logout.jsp").forward(request, response);
     }
 

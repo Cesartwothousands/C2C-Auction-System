@@ -44,7 +44,6 @@ public class LoginDao {
                 result=member;
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;

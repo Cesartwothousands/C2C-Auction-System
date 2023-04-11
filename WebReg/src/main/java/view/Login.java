@@ -46,7 +46,7 @@ public class Login extends HttpServlet {
         Member result=rdao.query(member);
         if(result!=null){
             HttpSession session=request.getSession();
-            session.setAttribute("email",result.getEmail());
+            session.setAttribute("Member",result);
             response.sendRedirect("Logout");
         }else {
             response.getWriter().println("Not found");
