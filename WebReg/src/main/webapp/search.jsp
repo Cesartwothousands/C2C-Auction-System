@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Explore Page</title>
+        <title>Search Page</title>
         <link rel="stylesheet" href="./style_explore.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -58,19 +58,16 @@
                 ];
 
                 // Data
-                // Get the tableItemsJson attribute from the request object
-                var tableItemsJson = '<%= request.getAttribute("tableItemsJson") %>';
-
-                // Parse the JSON string into a JavaScript object
-                var tableItems = JSON.parse(tableItemsJson) || [];
-                console.log(tableItemsJson, tableItems);
+                // Get the searchResultsJson attribute from the request object
+                var searchResultsJson = '<%= request.getAttribute("searchResultsJson") %>';
+                var searchResults = JSON.parse(searchResultsJson) || [];
 
                 // Convert the tableItems object to the format expected by rowData
-                var rowData = tableItems.map(function (item) {
+                var rowData = searchResults.map(function (item) {
                     return {
                         a: item.name,
                         b: item.initialPrice,
-                        c: item.finalPrice,
+                        c: item.initialPrice + item.increment,
                         d: item.endDate,
                         e: item.description
                     };
