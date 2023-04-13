@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
         String email=request.getParameter("email");
         // String phone=request.getParameter("phone");
         MemberDao rdao=new MemberDao();
-        Member result=rdao.getMember(password,email);
+        Member result=rdao.getMember(email,password);
         if(result!=null){
             HttpSession session=request.getSession();
             session.setAttribute("Member",result);
