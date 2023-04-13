@@ -1,6 +1,5 @@
 package view;
 
-import controller.LoginDao;
 import model.Member;
 
 import java.io.IOException;

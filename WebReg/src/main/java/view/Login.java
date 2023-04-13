@@ -1,6 +1,6 @@
 package view;
 
-import controller.LoginDao;
+import controller.MemberDao;
 import model.Member;
 
 import java.io.IOException;
@@ -41,9 +41,8 @@ public class Login extends HttpServlet {
         String password=request.getParameter("password");
         String email=request.getParameter("email");
         // String phone=request.getParameter("phone");
-        Member member=new Member(null, password, email);
-        LoginDao rdao=new LoginDao();
-        Member result=rdao.query(member);
+        MemberDao rdao=new MemberDao();
+        Member result=rdao.getMember(password,email);
         if(result!=null){
             HttpSession session=request.getSession();
             session.setAttribute("Member",result);

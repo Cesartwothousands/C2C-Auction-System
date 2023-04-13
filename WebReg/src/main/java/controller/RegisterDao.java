@@ -3,40 +3,17 @@ package controller;
 import model.Member;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-public class RegisterDao {
-    private final DBConfig dbConfig=new DBConfig();
-
-    public void loadDriver(String dbDriver)
-    {
-        try {
-            Class.forName(dbDriver);
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-    public Connection getConnection() {
-        Connection con = null;
-        try {
-            con = DriverManager.getConnection(
-                    dbConfig.getUrl(),
-                    dbConfig.getUser(), dbConfig.getPassword());
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return con;
+public class RegisterDao extends Dao{
+    public RegisterDao() {
+        super();
     }
 
     public String insert(Member member) {
-        String dbdriver = dbConfig.getDbdriver();
-        loadDriver(dbdriver);
         String result;
 
         // Check if the username is taken

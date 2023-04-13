@@ -1,16 +1,44 @@
 package model;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Item {
     String name;
     Date startDate;
     Date endDate;
     Double initialPrice;
+
+    public List<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(List<Property> properties) {
+        this.properties = properties;
+    }
+
     Double increment;
     Double minimumPrice;
     String description;
     Member seller;
+
+    List<Property> properties;
+
+    Type type;
+
+    public Item(String name, Date startDate, Date endDate, Double initialPrice, Double increment, Double minimumPrice, String description, Member seller, List<Property> properties, Type type, Type type1) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.initialPrice = initialPrice;
+        this.increment = increment;
+        this.minimumPrice = minimumPrice;
+        this.description = description;
+        this.seller = seller;
+        this.properties = properties;
+        this.type = type;
+        this.type = type1;
+    }
 
     public String getName() {
         return name;
@@ -84,17 +112,4 @@ public class Item {
         this.type = type;
     }
 
-    Type type;
-
-    public Item(String name, Date startDate, Date endDate, Double initialPrice, Double increment, Double minimumPrice, String description, Member seller, Type type) {
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.initialPrice = initialPrice;
-        this.increment = increment;
-        this.minimumPrice = minimumPrice;
-        this.description = description;
-        this.seller = seller;
-        this.type = type;
-    }
 }

@@ -12,8 +12,8 @@
     <table>
       <c:forEach items="${alerts}" var="alert">
         <tr>
-          <td><c:out value="${alert.getId()}" /></td>
-          <td><c:out value="${alert.propString()}" /></td>
+          <td><c:out value="${alerts.getId()}" /></td>
+          <td><c:out value="${alerts.propString()}" /></td>
         </tr>
       </c:forEach>
     </table>

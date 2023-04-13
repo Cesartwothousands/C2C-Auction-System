@@ -6,34 +6,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExploreDao {
-    private final DBConfig dbConfig=new DBConfig();
+public class ExploreDao extends Dao{
 
-    public void loadDriver(String dbDriver){
-        try {
-            Class.forName(dbDriver);
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    public Connection getConnection() {
-        Connection con = null;
-        try {
-            con = DriverManager.getConnection(
-                    dbConfig.getUrl(),
-                    dbConfig.getUser(), dbConfig.getPassword());
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return con;
+    public ExploreDao() {
+        super();
     }
 
     public List<TableItem> get() {
-        String dbdriver = dbConfig.getDbdriver();
-        loadDriver(dbdriver);
         List<TableItem> tableItems = new ArrayList<>();
         Connection con = getConnection();
         String sql = "SELECT * FROM mydb.auction ORDER BY endDate ASC LIMIT 25";
@@ -44,7 +23,7 @@ public class ExploreDao {
 
             while (rs.next()) {
                 String name = rs.getString("name");
-                Double initialPrice = rs.getDouble("initialPrice");
+                double initialPrice = rs.getDouble("initialPrice");
                 Double finalPrice = initialPrice+rs.getDouble("increment");
                 Date endDate = rs.getDate("endDate");
                 String description = rs.getString("description");

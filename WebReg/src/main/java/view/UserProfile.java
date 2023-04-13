@@ -1,9 +1,12 @@
 package view;
 
+import controller.AlertDao;
 import controller.RegisterDao;
+import model.Alert;
 import model.Member;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,6 +35,8 @@ public class UserProfile extends HttpServlet {
         HttpSession session=request.getSession(false);
         Member n=(Member)session.getAttribute("Member");
         request.setAttribute("member", n);
+        List<Alert> alerts=new AlertDao().getAlertByMember(n);
+        request.setAttribute("alerts", alerts);
         request.getRequestDispatcher("user_profile.jsp").forward(request, response);
     }
 
