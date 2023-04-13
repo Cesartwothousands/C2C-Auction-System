@@ -136,4 +136,45 @@ public class PropertyDao extends Dao{
         }
         return result;
     }
+
+    // select distinct type from mydb.property;
+    public List<Type> getAllType(){
+        Connection con = getConnection();
+        String sql = "select distinct type from mydb.property";
+        List<Type> result=new ArrayList<>();
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs =ps.executeQuery();
+            if(rs!=null){
+                while(rs.next()){
+                    //index start from 1
+                    result.add(new Type(rs.getString(1)));
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    // select property name by type
+    public List<String> getPropertyByType(Type type){
+        Connection con = getConnection();
+        String sql = "select name from mydb.property where type=?";
+        List<String> result=new ArrayList<>();
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, type.getName());
+            ResultSet rs =ps.executeQuery();
+            if(rs!=null){
+                while(rs.next()){
+                    //index start from 1
+                    result.add(rs.getString(1));
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

@@ -23,6 +23,7 @@ public class ItemDao extends Dao{
             ResultSet rs =ps.executeQuery();
             if(rs!=null&&rs.next()){
                 //index start from 1
+                int id=rs.getInt(1);
                 String name=rs.getString(2);
                 Date endDate=rs.getDate(3);
                 Double initialPrice=rs.getDouble(4);
@@ -33,7 +34,7 @@ public class ItemDao extends Dao{
                 Type type=new Type(rs.getString(9));
                 Member member=new MemberDao().getMember(memberId);
                 List<Property> properties=new PropertyDao().getPropertyByItem(idItem);
-                result=new Item(name,endDate,initialPrice,increment,minimumPrice,description,member,properties,type);
+                result=new Item(id,name,endDate,initialPrice,increment,minimumPrice,description,member,properties,type);
             }
         }catch (Exception e){
             e.printStackTrace();

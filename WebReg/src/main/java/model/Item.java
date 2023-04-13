@@ -26,7 +26,9 @@ public class Item {
 
     Type type;
 
-    public Item(String name, Date endDate, Double initialPrice, Double increment, Double minimumPrice, String description, Member seller, List<Property> properties, Type type) {
+    int itemId;
+
+    public Item(int itemId,String name, Date endDate, Double initialPrice, Double increment, Double minimumPrice, String description, Member seller, List<Property> properties, Type type) {
         this.name = name;
         this.endDate = endDate;
         this.initialPrice = initialPrice;
@@ -36,6 +38,15 @@ public class Item {
         this.seller = seller;
         this.properties = properties;
         this.type = type;
+        this.itemId=itemId;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
     public String getName() {
