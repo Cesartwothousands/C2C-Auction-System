@@ -8,8 +8,6 @@
         <link rel="stylesheet" href="./style_explore.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-
         <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
 
 
@@ -50,34 +48,47 @@
 
             <script>
                 // Table
+
                 var columnDefs = [
-                    {
-                        headerName: "A", field: "a", sortable: true, filter: true, flex: 1
-                    },
-                    { headerName: "B", field: "b", sortable: true, filter: true, flex: 1 },
-                    { headerName: "C", field: "c", sortable: true, filter: true, flex: 1 },
-                    { headerName: "D", field: "d", sortable: true, filter: true, flex: 1 },
-                    { headerName: "E", field: "e", sortable: true, filter: true, flex: 1 },
-                    { headerName: "F", field: "f", sortable: true, filter: true, flex: 1 }
+                    { headerName: "Name", field: "a", sortable: true, filter: true, flex: 1 },
+                    { headerName: "Initial Price", field: "b", sortable: true, filter: true, flex: 1 },
+                    { headerName: "Current Price", field: "c", sortable: true, filter: true, flex: 1 },
+                    { headerName: "End date", field: "d", sortable: true, filter: true, flex: 1 },
+                    { headerName: "Description", field: "e", sortable: true, filter: true, flex: 1 },
                 ];
 
                 // Data
-                var rowData = [
-                    { a: "数据1", b: "数据2", c: "数据3", d: "数据4", e: "数据5", f: "数据6" },
-                    { a: "数据1", b: "数据2", c: "数据3", d: "数据4", e: "数据5", f: "数据6" },
-                    { a: "数据1", b: "数据23", c: "数据3", d: "数据4", e: "数据5", f: "数据6" },
-                ];
+                // Get the tableItemsJson attribute from the request object
+                var tableItemsJson = '<%= request.getAttribute("tableItemsJson") %>';
+
+                // Parse the JSON string into a JavaScript object
+                var tableItems = JSON.parse(tableItemsJson) || [];
+                console.log(tableItemsJson, tableItems);
+
+                // Convert the tableItems object to the format expected by rowData
+                var rowData = tableItems.map(function (item) {
+                    return {
+                        a: item.name,
+                        b: item.initialPrice,
+                        c: item.finalPrice,
+                        d: item.endDate,
+                        e: item.description
+                    };
+                });
+
 
                 var gridOptions = {
                     columnDefs: columnDefs,
                     rowData: rowData,
                     defaultColDef: {
-                        resizable: true
+                        resizable: false,
                     },
+                    suppressMovableColumns: true,
                     enableCellTextSelection: true
                 };
 
                 new agGrid.Grid(document.getElementById("myGrid"), gridOptions);
+
             </script>
         </div>
 
