@@ -1,8 +1,12 @@
 package view;
 
 import controller.AlertDao;
+import controller.AutoBidDao;
+import controller.BidDao;
 import controller.RegisterDao;
 import model.Alert;
+import model.AutoBid;
+import model.Bid;
 import model.Member;
 
 import java.io.IOException;
@@ -36,7 +40,11 @@ public class UserProfile extends HttpServlet {
         Member n=(Member)session.getAttribute("Member");
         request.setAttribute("member", n);
         List<Alert> alerts=new AlertDao().getAlertByMember(n);
+        List<AutoBid> autoBids=new AutoBidDao().getAutoBitByUser(n);
+        List<Bid> bids=new BidDao().getBidByUser(n);
         request.setAttribute("alerts", alerts);
+        request.setAttribute("autoBids", autoBids);
+        request.setAttribute("bids", bids);
         request.getRequestDispatcher("user_profile.jsp").forward(request, response);
     }
 
