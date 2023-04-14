@@ -1,3 +1,4 @@
 .idea/
 target/
-DBConfig.java
+**/DBConfig.java
+**/Schema.sql
