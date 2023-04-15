@@ -7,7 +7,7 @@
     - [ ] logout.
     
 ### I. Auctions
-- [ ] seller creates auctions and posts items for sale
+- [ ] seller creates auctions and posts items for sale (WYT)
     - [ ] set all the characteristics of the item
     - [ ] set closing date and time
     - [ ] set a hidden minimum price (reserve)
@@ -34,7 +34,7 @@
     - [ ] view all the history of bids for any specific auction
     - [ ] view the list of all auctions a specific buyer or seller has participated in
     - [ ] view the list of "similar" items on auctions in the preceding month (and auction information about them)
-- [ ] let user set an alert for specific items s/he is interested
+- [ ] let user set an alert for specific items s/he is interested (WYT)
     - [ ] get an alert when the item becomes available
 
 Discussion board
@@ -42,7 +42,7 @@ Discussion board
 - [ ] users search questions by keywords
 
 ### III. Admin and customer rep functions
-- [ ] Admin (create an admin account ahead of time)
+- [ ] Admin (create an admin account ahead of time) (WYT)
     - [ ] creates accounts for customer representatives
     - [ ] generates sales reports for:
         - [ ] total earnings

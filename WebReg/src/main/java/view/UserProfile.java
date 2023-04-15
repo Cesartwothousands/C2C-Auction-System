@@ -42,6 +42,7 @@ public class UserProfile extends HttpServlet {
         List<Alert> alerts=new AlertDao().getAlertByMember(n);
         List<AutoBid> autoBids=new AutoBidDao().getAutoBitByUser(n);
         List<Bid> bids=new BidDao().getBidByUser(n);
+        //System.out.println("alerts len: " + alerts.size()+ " autoBids len: " + autoBids.size() + " bids len: " + bids.size());
         request.setAttribute("alerts", alerts);
         request.setAttribute("autoBids", autoBids);
         request.setAttribute("bids", bids);

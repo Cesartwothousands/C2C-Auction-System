@@ -4,21 +4,30 @@ import java.util.List;
 
 public class Alert {
     private int id;
-    private List<Property> properties;
-    private Type type;
-    public Alert(int id, List<Property> properties,Type type) {
+
+    private Member user;
+    private String itemName;
+    public Alert(int id,Member user, String itemName) {
         super();
         this.id = id;
-        this.properties = properties;
-        this.type=type;
+        this.user = user;
+        this.itemName = itemName;
     }
 
-    public Type getType() {
-        return type;
+    public Member getUser() {
+        return user;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setUser(Member user) {
+        this.user = user;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public int getId() {
@@ -29,11 +38,4 @@ public class Alert {
         this.id = id;
     }
 
-    public List<Property> getProperties() {
-        return properties;
-    }
-
-    public void setProperties(List<Property> properties) {
-        this.properties = properties;
-    }
 }

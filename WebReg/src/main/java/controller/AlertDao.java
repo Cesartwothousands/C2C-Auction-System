@@ -22,12 +22,11 @@ public class AlertDao extends Dao{
             ps.setInt(1, idalert);
             ps.setInt(2, idUser);
             ResultSet rs =ps.executeQuery();
-            Type type=null;
+            Member member=new MemberDao().getMember(idUser);
             if(rs!=null&&rs.next()){
-                type=new Type(rs.getString(1));
+                String itemName=rs.getString(3);
+                return new Alert(idalert,member,itemName);
             }
-            List<Property> properties=new PropertyDao().getPropertyByAlert(idalert);
-            return new Alert(idalert,properties,type);
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,9 +54,8 @@ public class AlertDao extends Dao{
             if(rs!=null){
                 while(rs.next()){
                     int idalert=rs.getInt(1);
-                    Type type=new Type(rs.getString(2));
-                    List<Property> properties=new PropertyDao().getPropertyByAlert(idalert);
-                    alerts.add(new Alert(idalert,properties,type));
+                    String itemName=rs.getString(3);
+                    alerts.add(new Alert(idalert,member,itemName));
                 }
             }
             return alerts;
