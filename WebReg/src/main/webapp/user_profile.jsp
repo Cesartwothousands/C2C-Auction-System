@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hello <%= request.getAttribute("name"). %></title>
+<title>Hello <%= request.getAttribute("name")%></title>
 </head>
 <body>
 <div class="container">
