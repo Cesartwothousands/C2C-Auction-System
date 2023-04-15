@@ -41,4 +41,42 @@ public class ItemDao extends Dao{
         }
         return result;
     }
+
+    public void insertItem(String name, Date endDate, Double initialPrice, Double increment, Double minimumPrice, String description, int seller, String type, List<Property> properties){
+        Connection con = getConnection();
+        String sql = "insert into mydb.auction (name,enddate,initialprice,increment,minimumprice,description,seller,type) values (?,?,?,?,?,?,?,?)";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setDate(2, endDate);
+            ps.setDouble(3, initialPrice);
+            ps.setDouble(4, increment);
+            ps.setDouble(5, minimumPrice);
+            ps.setString(6, description);
+            ps.setInt(7, seller);
+            ps.setString(8, type);
+            ps.executeUpdate();
+            //get the id of the item
+            String sql2="select idItem from mydb.auction where name=? and enddate=? and initialprice=? and increment=? and minimumprice=? and description=? and seller=? and type=?";
+            PreparedStatement ps2 = con.prepareStatement(sql2);
+            ps2.setString(1, name);
+            ps2.setDate(2, endDate);
+            ps2.setDouble(3, initialPrice);
+            ps2.setDouble(4, increment);
+            ps2.setDouble(5, minimumPrice);
+            ps2.setString(6, description);
+            ps2.setInt(7, seller);
+            ps2.setString(8, type);
+            ResultSet rs =ps2.executeQuery();
+            int idItem=0;
+            if(rs!=null&&rs.next()){
+                idItem=rs.getInt(1);
+            }
+            for(Property property:properties){
+                new PropertyDao().insertProperty(idItem,property);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

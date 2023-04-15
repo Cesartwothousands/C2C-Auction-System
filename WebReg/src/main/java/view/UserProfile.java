@@ -55,7 +55,16 @@ public class UserProfile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession(false);
         Member n=(Member)session.getAttribute("Member");
-        request.setAttribute("name", n.getUname());
+        String itemName = request.getParameter("itemName");
+        //System.out.println("itemName: "+itemName);
+        new AlertDao().insertAlert(itemName,n);
+        request.setAttribute("member", n);
+        List<Alert> alerts=new AlertDao().getAlertByMember(n);
+        List<AutoBid> autoBids=new AutoBidDao().getAutoBitByUser(n);
+        List<Bid> bids=new BidDao().getBidByUser(n);
+        request.setAttribute("alerts", alerts);
+        request.setAttribute("autoBids", autoBids);
+        request.setAttribute("bids", bids);
         request.getRequestDispatcher("user_profile.jsp").forward(request, response);
     }
 }

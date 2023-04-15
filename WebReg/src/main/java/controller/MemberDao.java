@@ -1,6 +1,10 @@
 package controller;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Alert;
 import model.Member;
 public class MemberDao extends Dao{
     public MemberDao() {
@@ -48,5 +52,22 @@ public class MemberDao extends Dao{
             e.printStackTrace();
         }
         return result;
+    }
+    public int getMemberId(Member member){
+        Connection con = getConnection();
+        String sql = "select idUser from mydb.end_user where email=?";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, member.getEmail());
+            ResultSet rs =ps.executeQuery();
+            int idUser=-1;
+            if(rs!=null&&rs.next()){
+                idUser=rs.getInt(1);
+            }
+            return idUser;
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }

@@ -64,4 +64,18 @@ public class AlertDao extends Dao{
         }
         return new ArrayList<>();
     }
+    public void insertAlert(String itemName,Member member){
+        Connection con = getConnection();
+        int memberID=new MemberDao().getMemberId(member);
+        String sql = "INSERT INTO Alert (idUser,ItemName)\n" +
+                "VALUES (?,?);";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, memberID);
+            ps.setString(2, itemName);
+            ps.execute();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

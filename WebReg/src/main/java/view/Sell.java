@@ -1,7 +1,10 @@
 package view;
 
+import controller.ItemDao;
+import controller.MemberDao;
 import controller.PropertyDao;
 import model.Member;
+import model.Property;
 import model.Type;
 
 import javax.servlet.ServletException;
@@ -11,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,6 +50,27 @@ public class Sell extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("submitform") != null) {
             // Login form submitted. store to database
+            HttpSession session=request.getSession(false);
+            String type=(String)session.getAttribute("type");
+            String itemName = request.getParameter("name");
+            String initialPrice = request.getParameter("initial price");
+            String enddate = request.getParameter("end date");
+            String increment = request.getParameter("increment");
+            String minimumPrice = request.getParameter("minimum price");
+            String description = request.getParameter("description");
+            int count=1;
+            List<Property> properties=new ArrayList<>();
+            while(request.getParameter("property"+count)!=null){
+                String property = request.getParameter("property"+count);
+                String descriptionProperty = request.getParameter("description"+count);
+                properties.add(new Property(property, new Type(type), descriptionProperty));
+                System.out.println("property"+count+": "+property+" description: "+descriptionProperty);
+                count++;
+            }
+            Member member=(Member)session.getAttribute("member");
+            int memberid=new MemberDao().getMemberId(member);
+            new ItemDao().insertItem(itemName, Date.valueOf(enddate), Double.parseDouble(initialPrice), Double.parseDouble(increment), Double.parseDouble(minimumPrice), description, memberid,type, properties);
+            System.out.println("itemName: "+itemName+" type: "+type+" initialPrice: "+initialPrice+" enddate: "+enddate+" increment: "+increment+" minimumPrice: "+minimumPrice+" description: "+description);
             System.out.println("submitform");
         }else{
             // type submitted, change the property list
@@ -55,6 +81,8 @@ public class Sell extends HttpServlet {
             System.out.println("type: "+type);
             List<String> typeToProperty=pdao.getPropertyByType(new Type(type));
             System.out.println("property len: "+typeToProperty.size());
+            HttpSession session=request.getSession(false);
+            session.setAttribute("type", type);
             request.setAttribute("propertylist", typeToProperty);
             request.getRequestDispatcher("sell.jsp").forward(request, response);
         }

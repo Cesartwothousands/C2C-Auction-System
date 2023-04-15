@@ -30,7 +30,7 @@
                  </select>
        <input type = "submit" name="submittype" value = "Submit" />
     </form>
-    <form action = "Sell" method = "POST">
+    <form action = "Sell" name="mainForm" method = "POST">
              Name: <input type = "text" name = "name">
              <br />
              End Date: <input type = "date" name = "end date" />
@@ -44,13 +44,12 @@
              Description: <input type = "text" name = "description" />
              <br />
              Add A property:
-             </div>
               <div class="jumbotron jumbotron-fluid" id="dataAdd">
                          <div class="container">
                              <div class="form-row">
                                <div class="form-group col-md-4">
                                  <label>Property</label>
-                                 <select name="property" id="selectproperty1">
+                                 <select name="property1" id="selectproperty1">
                                  <%
                                    List<String> properties= (List<String>) request.getAttribute("propertylist");
                                    if(properties!=null){
@@ -61,7 +60,7 @@
                                </div>
                                <div class="form-group col-md-4">
                                  <label>Description</label>
-                                 <input class="form-control" id="lastname1" type="text">
+                                 <input class="form-control" name="description1" id="lastname1" type="text">
                                </div>
                      </div>
               </div>
@@ -80,14 +79,14 @@ function addRow(){
     $("#dataAdd .container:last").append('<div class="form-row">'+
                                          '<div class="form-group col-md-4">'+
                                          '<label>Property</label>'+
-                                 '<select name="property" id="selectproperty'+len+'">'+
+                                 '<select name="property'+len+'" id="selectproperty'+len+'">'+
                                  '<%properties= (List<String>) request.getAttribute("propertylist");if(properties!=null){for(String prop: properties){%>'+
                                    '<option value='+'"<%=prop%>"'+'>'+'<%=prop%>'+'</option>'+'<%}}%>'+
                                  '</select>'+
                                          '</div>'+
                                          '<div class="form-group col-md-4">'+
                                          '<label>Description</label>'+
-                                         '<input class="form-control" id="description'+len+'" type="text">'+
+                                         '<input class="form-control" name="description'+len+'" id="description'+len+'" type="text">'+
                                          '</div>'+'</div>'    );
 }
         var btn = document.getElementById("addRow");

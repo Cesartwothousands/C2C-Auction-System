@@ -118,4 +118,31 @@ public class PropertyDao extends Dao{
         }
         return result;
     }
+    public void insertProperty(int itemid,Property property){
+        //get property id from mydb.property
+        Connection con = getConnection();
+        String sql = "select idproperty from mydb.property where name=? and type=?";
+        String sql2 = "insert into mydb.itemProperty(idItem,idproperty,description) values(?,?,?)";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, property.getName());
+            ps.setString(2, property.getType().getName());
+            ResultSet rs =ps.executeQuery();
+            int idProperty=-1;
+            if(rs!=null&&rs.next()){
+                //index start from 1
+                idProperty=rs.getInt(1);
+            }
+            if(idProperty==-1){
+                return;
+            }
+            PreparedStatement ps2 = con.prepareStatement(sql2);
+            ps2.setInt(1, itemid);
+            ps2.setInt(2, idProperty);
+            ps2.setString(3, property.getValue());
+            ps2.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

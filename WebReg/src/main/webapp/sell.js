@@ -10,7 +10,10 @@ function deleteRow(){
    alert('Not able to Delete');
    }
 }
+function onSubmit(event){
 
+
+}
 window.onload = function() {
 
     var delbtn = document.getElementById("deleteRow");
