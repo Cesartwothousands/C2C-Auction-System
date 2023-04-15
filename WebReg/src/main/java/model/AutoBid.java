@@ -35,5 +35,8 @@ public class AutoBid {
         this.price = price;
     }
 
+    public String toString() {
+        return "member=" + member.getUname() + " price=" + price;
+    }
 
 }
