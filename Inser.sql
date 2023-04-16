@@ -7,13 +7,13 @@ VALUES
   (4,"Gareth Bruce","nibh lacinia","dolor.elit.pellentesque@icloud.couk"),
   (5,"Candice Oneal","vel arcu. Curab","mauris.vel@outlook.edu");
 
-INSERT INTO `auction` (`name`,`enddate`,`initialprice`,`increment`,`minimumprice`,`description`,`seller`,`type`)
+INSERT INTO `auction` (`name`,`enddate`,`initialprice`,`increment`,`minimumprice`,`description`,`seller`,`type`,`currentPrice`)
 VALUES
-  ("diam at","2024-02-04",105.39,1.15,709,"tellus. Nunc lectus pede, ultrices a, auctor non, feugiat nec, diam. Duis mi enim, condimentum eget, volutpat ornare,",2,"desserts"),
-  ("convallis convallis","2024-03-04",94.92,1.37,174,"Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In",2,"soups"),
-  ("dolor, nonummy ac","2023-05-15",98.35,0.73,255,"magna. Phasellus dolor",1,"desserts"),
-  ("egestas. Duis ac","2023-10-04",103.06,1.07,605,"cursus non, egestas a, dui.",5,"sandwiches"),
-  ("non quam.","2024-04-12",100.32,0.48,358,"sit amet lorem semper auctor.",3,"desserts");
+  ("diam at","2024-02-04",105.39,1.15,709,"tellus. Nunc lectus pede, ultrices a, auctor non, feugiat nec, diam. Duis mi enim, condimentum eget, volutpat ornare,",2,"desserts",105.39),
+  ("convallis convallis","2024-03-04",94.92,1.37,174,"Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In",2,"soups",94.92),
+  ("dolor, nonummy ac","2023-05-15",98.35,0.73,255,"magna. Phasellus dolor",1,"desserts",98.35),
+  ("egestas. Duis ac","2023-10-04",103.06,1.07,605,"cursus non, egestas a, dui.",5,"sandwiches",103.06),
+  ("non quam.","2024-04-12",100.32,0.48,358,"sit amet lorem semper auctor.",3,"desserts",100.32);
 
 INSERT INTO `property` (`name`,`type`)
 VALUES

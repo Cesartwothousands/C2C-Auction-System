@@ -32,9 +32,10 @@ public class ItemDao extends Dao{
                 String description=rs.getString(7);
                 int memberId=rs.getInt(8);
                 Type type=new Type(rs.getString(9));
+                double currentPrice=rs.getDouble(10);
                 Member member=new MemberDao().getMember(memberId);
                 List<Property> properties=new PropertyDao().getPropertyByItem(idItem);
-                result=new Item(id,name,endDate,initialPrice,increment,minimumPrice,description,member,properties,type);
+                result=new Item(id,name,endDate,initialPrice,increment,minimumPrice,description,member,properties,type,currentPrice);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -44,7 +45,7 @@ public class ItemDao extends Dao{
 
     public void insertItem(String name, Date endDate, Double initialPrice, Double increment, Double minimumPrice, String description, int seller, String type, List<Property> properties){
         Connection con = getConnection();
-        String sql = "insert into mydb.auction (name,enddate,initialprice,increment,minimumprice,description,seller,type) values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into mydb.auction (name,enddate,initialprice,increment,minimumprice,description,seller,type,currentPrice) values (?,?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, name);
@@ -55,6 +56,8 @@ public class ItemDao extends Dao{
             ps.setString(6, description);
             ps.setInt(7, seller);
             ps.setString(8, type);
+            //current price is the initial price
+            ps.setDouble(9, initialPrice);
             ps.executeUpdate();
             //get the id of the item
             String sql2="select idItem from mydb.auction where name=? and enddate=? and initialprice=? and increment=? and minimumprice=? and description=? and seller=? and type=?";
