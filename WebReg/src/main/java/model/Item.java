@@ -27,8 +27,9 @@ public class Item {
     Type type;
 
     int itemId;
+    double currentPrice;
 
-    public Item(int itemId,String name, Date endDate, Double initialPrice, Double increment, Double minimumPrice, String description, Member seller, List<Property> properties, Type type) {
+    public Item(int itemId,String name, Date endDate, Double initialPrice, Double increment, Double minimumPrice, String description, Member seller, List<Property> properties, Type type,Double currentPrice) {
         this.name = name;
         this.endDate = endDate;
         this.initialPrice = initialPrice;
@@ -39,6 +40,7 @@ public class Item {
         this.properties = properties;
         this.type = type;
         this.itemId=itemId;
+        this.currentPrice=currentPrice;
     }
 
     public int getItemId() {

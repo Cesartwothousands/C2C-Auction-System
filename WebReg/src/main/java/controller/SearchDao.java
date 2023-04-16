@@ -36,7 +36,7 @@ public class SearchDao extends Dao {
                 Type type = new Type(rs.getString(9));
                 Member member = new MemberDao().getMember(memberId);
                 List<Property> properties = new PropertyDao().getPropertyByItem(id);
-                Item result = new Item(id, name, endDate, initialPrice, increment, minimumPrice, description, member, properties, type);
+                Item result = new Item(id, name, endDate, initialPrice, increment, minimumPrice, description, member, properties, type,initialPrice);
 
                 searchResults.add(result);
             }
