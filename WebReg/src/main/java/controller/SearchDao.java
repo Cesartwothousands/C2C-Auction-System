@@ -11,23 +11,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class SearchDao extends Dao {
 
-    public List<Item> searchItem(String query){
+    public List<Item> searchItem(String query) {
         Connection con = getConnection();
-        String sql = "SELECT * FROM mydb.auction WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE);";
+        String sql = "SELECT * FROM mydb.auction WHERE MATCH(name, description, type) AGAINST(? IN BOOLEAN MODE);";
         List<Item> searchResults = new ArrayList<>();
 
-        try{
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, query);
-            ResultSet rs =ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-            while (rs!=null&&rs.next()){
+            while (rs != null && rs.next()) {
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
                 Date endDate = rs.getDate(3);
+                // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                // String endDateString = sdf.format(endDate);
+
                 Double initialPrice = rs.getDouble(4);
                 Double increment = rs.getDouble(5);
                 Double minimumPrice = rs.getDouble(6);
@@ -36,11 +41,12 @@ public class SearchDao extends Dao {
                 Type type = new Type(rs.getString(9));
                 Member member = new MemberDao().getMember(memberId);
                 List<Property> properties = new PropertyDao().getPropertyByItem(id);
-                Item result = new Item(id, name, endDate, initialPrice, increment, minimumPrice, description, member, properties, type);
+                Item result = new Item(id, name, endDate, initialPrice, increment, minimumPrice, description, member,
+                        properties, type);
 
                 searchResults.add(result);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

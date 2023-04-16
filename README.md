@@ -26,9 +26,10 @@
             - [ ] alert the winner that they won the auction
 
 ### II. Browsing and advanced search functionality
-- [ ] let people browse on the items and see the status of the current bidding 
-- [ ] sort by different criteria (by type, bidding price etc.)
-- [ ] search the list of items by various criteria.
+- [ ] (CZH) <u>let people browse on the items</u> and see the status of the current bidding (Precisly Bidding)
+- [ ] (CZH) sort by different criteria (by type, bidding price etc.) (Make Property in it)
+- [ ] (CZH) search the list of items by various criteria.
+    current price, auction enddate, bid price, item type, property name, seller name, 
 
 - [ ] a user should be able to:
     - [ ] view all the history of bids for any specific auction

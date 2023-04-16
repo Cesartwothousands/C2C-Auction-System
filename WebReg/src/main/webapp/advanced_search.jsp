@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Search Page</title>
-        <link rel="stylesheet" href="./style_explore.css">
+        <link rel="stylesheet" href="./style_advancedsearch.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
@@ -17,8 +17,6 @@
     <body>
         <div class="container">
             <!-- Navigation -->
-
-
             <div class="Brand-Search">
                 <a class="navbar-brand" href="">
                     <h1>&nbsp;&nbsp;&nbsp;C2C Auction System!&nbsp;&nbsp;</h1>
@@ -42,6 +40,10 @@
             </nav>
         </div>
 
+        <div class="container_3">
+
+        </div>
+
         <div class="container_2">
 
             <div id="myGrid" style="width: 100%; height: 78vh; " class="ag-theme-alpine"></div>
@@ -61,7 +63,6 @@
                 // Get the searchResultsJson attribute from the request object
                 var searchResultsJson = '<%= request.getAttribute("searchResultsJson") %>';
                 var searchResults = JSON.parse(searchResultsJson) || [];
-
 
                 // Convert the tableItems object to the format expected by rowData
                 var rowData = searchResults.map(function (item) {
