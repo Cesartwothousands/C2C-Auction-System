@@ -20,8 +20,8 @@ public class AdvancedSearchDao extends Dao {
 
         StringBuilder sql = new StringBuilder("SELECT * FROM mydb.auction AS a");
 
-        if (endDate != null || currentLowPrice != null || currentHighPrice != null || bidPrice != null
-                || itemType != null || propertyName != null || sellerName != null) {
+        if ((endDate != null || currentLowPrice != null || currentHighPrice != null || bidPrice != null
+                || itemType != "" || propertyName != "" || sellerName != "") && itemType != null) {
             sql.append(" WHERE");
             List<String> conditions = new ArrayList<>();
 
@@ -29,78 +29,84 @@ public class AdvancedSearchDao extends Dao {
                 conditions.add(" a.enddate <= ?");
             }
             if (currentLowPrice != null) {
-                conditions.add(" a.initialprice >= ?");
+                conditions.add(" a.currentPrice >= ?");
             }
             if (currentHighPrice != null) {
-                conditions.add(" a.initialprice <= ?");
+                conditions.add(" a.currentPrice <= ?");
             }
             if (bidPrice != null) {
-                conditions.add(" EXISTS (SELECT 1 FROM mydb.bid AS b WHERE a.idItem = b.idItem AND b.price <= ?)");
+                conditions.add(" a.increment <= ?");
             }
-            if (itemType != null) {
+            if (!itemType.equals("") ) {
                 conditions.add(" a.type = ?");
             }
-            if (propertyName != null) {
+            if (!propertyName.equals("") ) {
                 conditions.add(
                         " EXISTS (SELECT 1 FROM mydb.itemProperty AS ip JOIN mydb.property AS p ON ip.idproperty = p.idproperty WHERE a.idItem = ip.idItem AND p.name = ?)");
             }
-            if (sellerName != null) {
+            if (!sellerName.equals("") ) {
                 conditions.add(" EXISTS (SELECT 1 FROM mydb.end_user AS u WHERE a.seller = u.idUser AND u.name = ?)");
             }
 
             sql.append(String.join(" AND", conditions));
         }
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql.toString());
+        System.out.println("Executing SQL query: " + sql.toString());
 
-            int index = 1;
-            if (endDate != null) {
-                ps.setDate(index++, endDate);
-            }
-            if (currentLowPrice != null) {
-                ps.setDouble(index++, currentLowPrice);
-            }
-            if (currentHighPrice != null) {
-                ps.setDouble(index++, currentHighPrice);
-            }
-            if (bidPrice != null) {
-                ps.setDouble(index++, bidPrice);
-            }
-            if (itemType != null) {
-                ps.setString(index++, itemType);
-            }
-            if (propertyName != null) {
-                ps.setString(index++, propertyName);
-            }
-            if (sellerName != null) {
-                ps.setString(index++, sellerName);
-            }
+        if (itemType != null) {
+            try {
+                PreparedStatement ps = con.prepareStatement(sql.toString());
 
-            ResultSet rs = ps.executeQuery();
+                int index = 1;
+                if (endDate != null) {
+                    ps.setDate(index++, endDate);
+                }
+                if (currentLowPrice != null) {
+                    ps.setDouble(index++, currentLowPrice);
+                }
+                if (currentHighPrice != null) {
+                    ps.setDouble(index++, currentHighPrice);
+                }
+                if (bidPrice != null) {
+                    ps.setDouble(index++, bidPrice);
+                }
+                if (!itemType.equals("") ) {
+                    ps.setString(index++, itemType);
+                }
+                if (!propertyName.equals("") ) {
+                    ps.setString(index++, propertyName);
+                }
+                if (!sellerName.equals("") ) {
+                    ps.setString(index++, sellerName);
+                }
 
-            while (rs != null && rs.next()) {
-                Integer id = rs.getInt("idItem");
-                String name = rs.getString("name");
-                Double initialPrice = rs.getDouble("initialPrice");
-                Double increment = rs.getDouble("increment");
-                Double currentPrice = rs.getDouble("currentPrice");
-                Date endDate_2 = rs.getDate("endDate");
-                String endDateStr = endDate != null ? endDate_2.toString() : null;
-                String description = rs.getString("description");
-                String type = rs.getString("type");
+                System.out.println("Executing SQL query: " + ps);
+                ResultSet rs = ps.executeQuery();
 
-                Integer sellerId = rs.getInt("seller");
-                String sellerName_2 = getSellerName(sellerId);
+                while (rs != null && rs.next()) {
+                    Integer id = rs.getInt("idItem");
+                    String name = rs.getString("name");
+                    Double initialPrice = rs.getDouble("initialPrice");
+                    Double increment = rs.getDouble("increment");
+                    Double currentPrice = rs.getDouble("currentPrice");
+                    Date endDate_2 = rs.getDate("endDate");
+                    String endDateStr = endDate_2 != null ? endDate_2.toString() : null;
 
-                Integer bidnumber = getBidCount(id);
+                    String description = rs.getString("description");
+                    String type = rs.getString("type");
 
-                TableItem tableItem = new TableItem(id, name, initialPrice, currentPrice, increment, bidnumber,
-                        endDateStr, description, sellerName_2, type);
-                tableItems.add(tableItem);
+                    Integer sellerId = rs.getInt("seller");
+                    String sellerName_2 = getSellerName(sellerId);
+
+                    Integer bidnumber = getBidCount(id);
+
+                    TableItem tableItem = new TableItem(id, name, initialPrice, currentPrice, increment, bidnumber,
+                            endDateStr, description, sellerName_2, type);
+                    tableItems.add(tableItem);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         return tableItems;

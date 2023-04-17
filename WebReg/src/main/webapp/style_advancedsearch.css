@@ -24,7 +24,6 @@ body {
 .navbar-brand {
     color: #12d833;
     text-decoration: none;
-    width: 25vw;
 }
 
 .search-input {
@@ -32,8 +31,17 @@ body {
     height: 40px;
 }
 
+.search-form {
+    width: auto;
+}
+
 .search-button {
     width: 10vw;
+    height: 40px;
+}
+
+.ad-search-button {
+    width: auto;
     height: 40px;
 }
 

@@ -40,7 +40,7 @@ public class Search extends HttpServlet {
         Gson gson = new Gson();
         String searchResultsJson = gson.toJson(searchResults);
 
-        request.setAttribute("searchResultsJson", searchResultsJson);
+        request.setAttribute("SearchTable", searchResultsJson);
         request.getRequestDispatcher("search.jsp").forward(request, response);
     }
 }

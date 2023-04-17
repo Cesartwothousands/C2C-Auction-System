@@ -17,18 +17,25 @@
     <body>
         <div class="container">
             <!-- Navigation -->
-
-
             <div class="Brand-Search">
-                <a class="navbar-brand" href="">
-                    <h1>&nbsp;&nbsp;&nbsp;C2C Auction System!&nbsp;&nbsp;</h1>
-                </a>
 
-                <form action="/webreg/Search" method="GET">
+                <button class="ad-search-button">
+                    <a href="/webreg/Explore">
+                        <h1>
+                            C2C Auction System!
+                        </h1>
+                    </a>
+                </button>
+
+                <form class="search-form" action="/webreg/Search" method="GET">
                     <input class="search-input" type="search" name="query" placeholder="Search Everything You Want"
                         aria-label="Search">
                     <button class="search-button" type="submit">Search</button>
                 </form>
+
+                <button class="ad-search-button">
+                    <a href="/webreg/AdvancedSearch">Advanced</a>
+                </button>
             </div>
 
             <nav class="nav-container">
@@ -50,39 +57,47 @@
                 // Table
 
                 var columnDefs = [
-                    { headerName: "Name", field: "a", sortable: true, flex: 1 },
-                    { headerName: "Initial Price", field: "b", sortable: true, flex: 1 },
-                    { headerName: "Current Price", field: "c", sortable: true, flex: 1 },
-                    { headerName: "End date", field: "d", sortable: true, flex: 1 },
-                    { headerName: "Description", field: "e", sortable: true, flex: 1 },
+                    { headerName: "Name", field: "a", sortable: true, flex: 2 },
+                    { headerName: "End date", field: "b", sortable: true, flex: 1.5 },
+                    { headerName: "Initial Price", field: "c", sortable: true, flex: 1 },
+                    { headerName: "Current Price", field: "d", sortable: true, flex: 1 },
+                    { headerName: "Increment", field: "e", sortable: true, flex: 1 },
+                    { headerName: "Bids", field: "f", sortable: true, flex: 1 },
+                    { headerName: "Type", field: "g", sortable: true, flex: 2 },
+                    { headerName: "Seller", field: "h", sortable: true, flex: 2 },
                 ];
 
                 // Data
                 // Get the tableItemsJson attribute from the request object
-                var tableItemsJson = '<%= request.getAttribute("tableItemsJson") %>';
+                var tableItemsJson = '<%= request.getAttribute("ExploreTable") %>';
+                //console.log(tableItemsJson);
 
                 // Parse the JSON string into a JavaScript object
                 var tableItems = JSON.parse(tableItemsJson) || [];
-                console.log(tableItemsJson, tableItems);
 
                 // Convert the tableItems object to the format expected by rowData
                 var rowData = tableItems.map(function (item) {
                     return {
                         a: item.name,
-                        b: item.initialPrice,
-                        c: item.finalPrice,
-                        d: item.endDate,
-                        e: item.description
+                        b: item.endDate,
+                        c: item.initialPrice,
+                        d: item.currentPrice,
+                        e: item.increment,
+                        f: item.bidnumber,
+                        g: item.type,
+                        h: item.seller
                     };
                 });
-
 
                 var gridOptions = {
                     columnDefs: columnDefs,
                     rowData: rowData,
                     defaultColDef: {
                         resizable: false,
-                        filter: false
+                        filter: false,
+                        autoHeight: true, // Enable auto height for rows
+                        wrapText: true, // Enable text wrapping
+                        cellStyle: { 'white-space': 'normal' } // Allow text to wrap to next line
                     },
                     suppressMovableColumns: true,
                     enableCellTextSelection: true
