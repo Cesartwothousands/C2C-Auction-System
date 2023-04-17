@@ -1,9 +1,6 @@
 package controller;
 
-import model.Item;
-import model.Member;
-import model.Property;
-import model.Type;
+import model.TableItem;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,17 +8,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 public class AdvancedSearchDao extends Dao {
 
-    public List<Item> SearchByCriteria(
-            Date endDate, Double currentLowPrice, Double currentHighPrice, Double bidPrice, String itemType, String propertyName, String sellerName) {
+    public List<TableItem> get(
+            Date endDate, Double currentLowPrice, Double currentHighPrice, Double bidPrice, String itemType,
+            String propertyName, String sellerName) {
         Connection con = getConnection();
-        List<Item> searchResults = new ArrayList<>();
+        List<TableItem> tableItems = new ArrayList<>();
 
         StringBuilder sql = new StringBuilder("SELECT * FROM mydb.auction AS a");
 
-        if (endDate != null || currentLowPrice != null || currentHighPrice != null || bidPrice != null || itemType != null || propertyName != null || sellerName != null) {
+        if (endDate != null || currentLowPrice != null || currentHighPrice != null || bidPrice != null
+                || itemType != null || propertyName != null || sellerName != null) {
             sql.append(" WHERE");
             List<String> conditions = new ArrayList<>();
 
@@ -41,7 +41,8 @@ public class AdvancedSearchDao extends Dao {
                 conditions.add(" a.type = ?");
             }
             if (propertyName != null) {
-                conditions.add(" EXISTS (SELECT 1 FROM mydb.itemProperty AS ip JOIN mydb.property AS p ON ip.idproperty = p.idproperty WHERE a.idItem = ip.idItem AND p.name = ?)");
+                conditions.add(
+                        " EXISTS (SELECT 1 FROM mydb.itemProperty AS ip JOIN mydb.property AS p ON ip.idproperty = p.idproperty WHERE a.idItem = ip.idItem AND p.name = ?)");
             }
             if (sellerName != null) {
                 conditions.add(" EXISTS (SELECT 1 FROM mydb.end_user AS u WHERE a.seller = u.idUser AND u.name = ?)");
@@ -79,26 +80,69 @@ public class AdvancedSearchDao extends Dao {
             ResultSet rs = ps.executeQuery();
 
             while (rs != null && rs.next()) {
-                int idItem = rs.getInt("idItem");
+                Integer id = rs.getInt("idItem");
                 String name = rs.getString("name");
-                Date enddate = rs.getDate("enddate");
-                double initialprice = rs.getDouble("initialprice");
-                double increment = rs.getDouble("increment");
-                double minimumprice = rs.getDouble("minimumprice");
+                Double initialPrice = rs.getDouble("initialPrice");
+                Double increment = rs.getDouble("increment");
+                Double currentPrice = rs.getDouble("currentPrice");
+                Date endDate_2 = rs.getDate("endDate");
+                String endDateStr = endDate != null ? endDate_2.toString() : null;
                 String description = rs.getString("description");
-                int seller = rs.getInt("seller");
                 String type = rs.getString("type");
 
-                Item item = new Item(idItem, name, enddate, initialprice, increment, minimumprice, description, seller, type);
-                searchResults.add(item);
+                Integer sellerId = rs.getInt("seller");
+                String sellerName_2 = getSellerName(sellerId);
+
+                Integer bidnumber = getBidCount(id);
+
+                TableItem tableItem = new TableItem(id, name, initialPrice, currentPrice, increment, bidnumber,
+                        endDateStr, description, sellerName_2, type);
+                tableItems.add(tableItem);
             }
-
-
-        }catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return searchResults;
+        return tableItems;
+    }
+
+    public Integer getBidCount(Integer itemId) {
+        String sql = "SELECT COUNT(*) AS bid_count FROM mydb.bid WHERE idItem = ?";
+        Integer bidCount = 0;
+        Connection con = getConnection();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, itemId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                bidCount = rs.getInt("bid_count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bidCount;
+    }
+
+    public String getSellerName(Integer sellerId) {
+        String sql = "SELECT name FROM mydb.end_user WHERE idUser = ?";
+        String sellerName = "";
+
+        try (Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, sellerId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                sellerName = rs.getString("name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return sellerName;
     }
 
 }

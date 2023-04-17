@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`end_user` (
   `name` VARCHAR(16) NOT NULL,
   `password` VARCHAR(32) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
+  `earning` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`idUser`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -44,8 +45,10 @@ CREATE TABLE IF NOT EXISTS `mydb`.`auction` (
   `description` LONGTEXT NOT NULL,
   `seller` INT NOT NULL,
   `type` VARCHAR(45) NULL,
+  `currentPrice` DOUBLE NOT NULL DEFAULT 0,
   PRIMARY KEY (`idItem`),
-  INDEX `seller_idx` (`seller` ASC) VISIBLE,
+  INDEX `seller_idx` (`seller` ASC) INVISIBLE,
+  FULLTEXT INDEX `search` (`name`, `description`, `type`) VISIBLE,
   CONSTRAINT `seller`
     FOREIGN KEY (`seller`)
     REFERENCES `mydb`.`end_user` (`idUser`)
@@ -62,8 +65,8 @@ DROP TABLE IF EXISTS `mydb`.`bid` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`bid` (
   `idItem` INT NOT NULL,
   `idUser` INT NOT NULL,
-  `price` DOUBLE(9,2) NULL,
-  PRIMARY KEY (`idItem`, `idUser`),
+  `price` DOUBLE(9,2) NOT NULL,
+  PRIMARY KEY (`idItem`, `idUser`, `price`),
   INDEX `idUser_idx` (`idUser` ASC) VISIBLE,
   CONSTRAINT `idItem_bid`
     FOREIGN KEY (`idItem`)
@@ -86,7 +89,7 @@ DROP TABLE IF EXISTS `mydb`.`autobid` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`autobid` (
   `idItem` INT NOT NULL,
   `idUser` INT NOT NULL,
-  `upperlimit` DOUBLE(9,2) NULL,
+  `upperlimit` DOUBLE(9,2) NOT NULL,
   PRIMARY KEY (`idItem`, `idUser`),
   INDEX `idUser_idx` (`idUser` ASC) VISIBLE,
   CONSTRAINT `idItem_autobid`
@@ -108,10 +111,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`representatives` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`representatives` (
+  `idRep` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(16) NOT NULL,
   `email` VARCHAR(255) NULL,
   `password` VARCHAR(32) NOT NULL,
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP);
+  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idRep`));
 
 
 -- -----------------------------------------------------
@@ -147,8 +152,8 @@ DROP TABLE IF EXISTS `mydb`.`itemProperty` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`itemProperty` (
   `idItem` INT NOT NULL,
   `idproperty` INT NOT NULL,
-  `describtion` VARCHAR(45) NULL,
-  PRIMARY KEY (`idItem`, `idproperty`),
+  `describtion` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idItem`, `idproperty`, `describtion`),
   INDEX `property_idx` (`idproperty` ASC) VISIBLE,
   CONSTRAINT `item_itemp`
     FOREIGN KEY (`idItem`)
@@ -171,8 +176,8 @@ DROP TABLE IF EXISTS `mydb`.`alert` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`alert` (
   `idalert` INT NOT NULL AUTO_INCREMENT,
   `idUser` INT NOT NULL,
-  `type` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idalert`, `idUser`),
+  `ItemName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idalert`),
   INDEX `idUser_idx` (`idUser` ASC) VISIBLE,
   CONSTRAINT `idUser_alert`
     FOREIGN KEY (`idUser`)
@@ -183,24 +188,27 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`alertproperty`
+-- Table `mydb`.`question`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`alertproperty` ;
+DROP TABLE IF EXISTS `mydb`.`question` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`alertproperty` (
-  `idalert` INT NOT NULL,
-  `idproperty` INT NOT NULL,
-  `detail` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idalert`, `idproperty`),
-  INDEX `property_idx` (`idproperty` ASC) VISIBLE,
-  CONSTRAINT `alert_prop`
-    FOREIGN KEY (`idalert`)
-    REFERENCES `mydb`.`alert` (`idalert`)
+CREATE TABLE IF NOT EXISTS `mydb`.`question` (
+  `idquestion` INT NOT NULL,
+  `idUser` INT NOT NULL,
+  `idAdmin` INT NULL,
+  `question` LONGTEXT NOT NULL,
+  `answer` LONGTEXT NULL,
+  PRIMARY KEY (`idquestion`),
+  INDEX `question_repre_idx` (`idAdmin` ASC) VISIBLE,
+  INDEX `question_user_idx` (`idUser` ASC) VISIBLE,
+  CONSTRAINT `question_repre`
+    FOREIGN KEY (`idAdmin`)
+    REFERENCES `mydb`.`representatives` (`idRep`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `property_prop`
-    FOREIGN KEY (`idproperty`)
-    REFERENCES `mydb`.`property` (`idproperty`)
+  CONSTRAINT `question_user`
+    FOREIGN KEY (`idUser`)
+    REFERENCES `mydb`.`end_user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

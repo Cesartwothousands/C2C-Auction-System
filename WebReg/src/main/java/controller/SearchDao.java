@@ -1,9 +1,6 @@
 package controller;
 
-import model.Item;
-import model.Member;
-import model.Property;
-import model.Type;
+import model.TableItem;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,15 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+
+import java.sql.*;
 
 public class SearchDao extends Dao {
 
-    public List<Item> searchItem(String query) {
+    public List<TableItem> get(String query) {
         Connection con = getConnection();
         String sql = "SELECT * FROM mydb.auction WHERE MATCH(name, description, type) AGAINST(? IN BOOLEAN MODE);";
-        List<Item> searchResults = new ArrayList<>();
+        List<TableItem> tableItems = new ArrayList<>();
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -27,31 +24,69 @@ public class SearchDao extends Dao {
             ResultSet rs = ps.executeQuery();
 
             while (rs != null && rs.next()) {
-                int id = rs.getInt(1);
-                String name = rs.getString(2);
-                Date endDate = rs.getDate(3);
-                // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-                // String endDateString = sdf.format(endDate);
+                Integer id = rs.getInt("idItem");
+                String name = rs.getString("name");
+                Double initialPrice = rs.getDouble("initialPrice");
+                Double increment = rs.getDouble("increment");
+                Double currentPrice = rs.getDouble("currentPrice");
+                Date endDate = rs.getDate("endDate");
+                String endDateStr = endDate != null ? endDate.toString() : null;
+                String description = rs.getString("description");
+                String type = rs.getString("type");
 
-                Double initialPrice = rs.getDouble(4);
-                Double increment = rs.getDouble(5);
-                Double minimumPrice = rs.getDouble(6);
-                String description = rs.getString(7);
-                int memberId = rs.getInt(8);
-                Type type = new Type(rs.getString(9));
-                Member member = new MemberDao().getMember(memberId);
-                List<Property> properties = new PropertyDao().getPropertyByItem(id);
+                Integer sellerId = rs.getInt("seller");
+                String sellerName = getSellerName(sellerId);
 
-                Item result = new Item(id, name, endDate, initialPrice, increment, minimumPrice, description, member,
-                        properties, type, initialPrice);
+                Integer bidnumber = getBidCount(id);
 
-                searchResults.add(result);
+                TableItem tableItem = new TableItem(id, name, initialPrice, currentPrice, increment, bidnumber,
+                        endDateStr, description, sellerName, type);
+                tableItems.add(tableItem);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return searchResults;
+        return tableItems;
+    }
+
+    public Integer getBidCount(Integer itemId) {
+        String sql = "SELECT COUNT(*) AS bid_count FROM mydb.bid WHERE idItem = ?";
+        Integer bidCount = 0;
+        Connection con = getConnection();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, itemId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                bidCount = rs.getInt("bid_count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bidCount;
+    }
+
+    public String getSellerName(Integer sellerId) {
+        String sql = "SELECT name FROM mydb.end_user WHERE idUser = ?";
+        String sellerName = "";
+
+        try (Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, sellerId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                sellerName = rs.getString("name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return sellerName;
     }
 
 }
