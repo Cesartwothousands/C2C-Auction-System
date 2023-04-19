@@ -17,10 +17,10 @@
         <form action="Bargain" method="post">
             <table>
                 <tr>
-                    <input type="text" id="bargain_price" name="increment" placeholder="please input your increment">
+                    <input type="text" id="bargain_price" name="currentPrice" placeholder="please input your bid">
                 </tr>
                 <tr>
-                    <input type="submit" value="Bargain">
+                    <input type="submit" value="Place Bid">
                 </tr>
             </table>
         </form>
@@ -34,9 +34,10 @@
             var columnDefs = [
                 { headerName: "Name", field: "a", sortable: true, flex: 1 },
                 { headerName: "Initial Price", field: "b", sortable: true, flex: 1 },
-                { headerName: "Current Price", field: "c", sortable: true, flex: 1 },
-                { headerName: "End date", field: "d", sortable: true, flex: 1 },
-                { headerName: "Description", field: "e", sortable: true, flex: 1 },
+                { headerName: "Increment", field: "c", sortable: true, flex: 1 },
+                { headerName: "Current Price", field: "d", sortable: true, flex: 1 },
+                { headerName: "End date", field: "e", sortable: true, flex: 1 },
+                { headerName: "Description", field: "f", sortable: true, flex: 1 },
             ];
 
             // Data
@@ -52,9 +53,10 @@
                 return {
                     a: item.name,
                     b: item.initialPrice,
-                    c: item.finalPrice,
-                    d: item.endDate,
-                    e: item.description
+                    c:item.increment,
+                    d: item.currentPrice,
+                    e: item.endDate,
+                    f: item.description
                 };
             });
             var gridOptions = {
@@ -62,7 +64,10 @@
                 rowData: rowData,
                 defaultColDef: {
                     resizable: false,
-                    filter: false
+                    filter: false,
+                    autoHeight: true, // Enable auto height for rows
+                    wrapText: true, // Enable text wrapping
+                    cellStyle: { 'white-space': 'normal' } // Allow text to wrap to next line
                 },
                 suppressMovableColumns: true,
                 enableCellTextSelection: true

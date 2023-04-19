@@ -17,11 +17,11 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-@WebServlet(value = "/Bargain/{param}")
+@WebServlet(value = "/Bargain")
 public class Bargain extends HttpServlet {
 
     List<TableItem> tableItemList;
-    int increment;
+    int currentPrice;
     int id;
     BargainDao bargainDao;
 
@@ -57,16 +57,17 @@ public class Bargain extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        increment = Integer.parseInt(request.getParameter("increment"));
+        currentPrice = Integer.parseInt(request.getParameter("currentPrice"));
         String result;
 
-        double pre_incre = tableItemList.get(0).getFinalPrice() - tableItemList.get(0).getInitialPrice();
-        if (increment <= pre_incre){
-            result = "increment can't be less or equal initial increment!";
+        double initialPrice = tableItemList.get(0).getInitialPrice();
+        double increment = tableItemList.get(0).getIncrement();
+        if (currentPrice - initialPrice < increment){
+            result = "increment can't be less than initial increment!";
         }
         else{
             result = "Successful bidding!";
-            bargainDao.update(increment, id);
+            bargainDao.update(currentPrice, id);
         }
         response.getWriter().println(result);
     }
