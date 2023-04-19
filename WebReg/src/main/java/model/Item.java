@@ -29,7 +29,15 @@ public class Item {
     int itemId;
     double currentPrice;
 
-    public Item(int itemId,String name, Date endDate, Double initialPrice, Double increment, Double minimumPrice, String description, Member seller, List<Property> properties, Type type,Double currentPrice) {
+    public double getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(double currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public Item(int itemId, String name, Date endDate, Double initialPrice, Double increment, Double minimumPrice, String description, Member seller, List<Property> properties, Type type, Double currentPrice) {
         this.name = name;
         this.endDate = endDate;
         this.initialPrice = initialPrice;
