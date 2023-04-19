@@ -1,7 +1,7 @@
 package controller;
 
 import model.TableItem;
-
+import controller.AdvancedSearchDao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,26 +11,22 @@ public class BargainDao extends Dao{
         super();
     }
 
-    public String update(int increment, int id){
-        String result;
-
+    public void update(double currentPrice, int id){
+        // we need to both update users' history and currentPrice.
         Connection con = getConnection();
-        String sql = "UPDATE mydb.auction SET increment = ? WHERE idItem = ?";
+        String sql = "UPDATE mydb.auction SET currentPrice = ? WHERE idItem = ?";
 
-        result="Data Updated Successfully";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, increment);
+            ps.setDouble(1, currentPrice);
             ps.setInt(2, id);
 
             ps.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            result="Data Update Failed!";
             e.printStackTrace();
         }
-        return result;
     }
 
     public List<TableItem> get(int id){
@@ -45,10 +41,16 @@ public class BargainDao extends Dao{
             if (rs.next()){
                 String name = rs.getString("name");
                 double initialPrice = rs.getDouble("initialPrice");
-                Double finalPrice = initialPrice+rs.getDouble("increment");
-                Date endDate = rs.getDate("endDate");
+                double currentPrice = rs.getDouble("currentPrice");
+                double increment = rs.getDouble("increment");
+                AdvancedSearchDao advancedSearchDao = new AdvancedSearchDao();
+                Integer bidnumber = advancedSearchDao.getBidCount(id);
+                String endDate = String.valueOf(rs.getDate("endDate"));
                 String description = rs.getString("description");
-                TableItem tableItem = new TableItem(name, initialPrice, finalPrice, endDate, description);
+                String seller = rs.getString("seller");
+                String type = rs.getString("type");
+                TableItem tableItem = new TableItem(id, name, initialPrice, currentPrice,
+                        increment, bidnumber, endDate, description, seller, type);
                 tableItems.add(tableItem);
             }
         } catch (SQLException e) {
