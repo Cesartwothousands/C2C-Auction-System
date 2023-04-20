@@ -59,6 +59,20 @@
             }
             %>
         </table>
+    <h3> Items in your Alert</h3>
+    <table>
+        <%
+        List<Item> items= (List<Item>) request.getAttribute("activeItems");
+        for(Item item:items)
+        {
+        %>
+        <tr>
+          <td><%=item.getName()%></td>
+          <td><%=item.toString()%></td>
+        </tr>
+        <%
+        }
+        %>
 </div>
 </body>
 </html>

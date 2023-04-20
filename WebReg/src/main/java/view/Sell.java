@@ -67,8 +67,9 @@ public class Sell extends HttpServlet {
                 System.out.println("property"+count+": "+property+" description: "+descriptionProperty);
                 count++;
             }
-            Member member=(Member)session.getAttribute("member");
+            Member member=(Member)session.getAttribute("Member");
             int memberid=new MemberDao().getMemberId(member);
+            System.out.println("memberid: "+memberid);
             new ItemDao().insertItem(itemName, Date.valueOf(enddate), Double.parseDouble(initialPrice), Double.parseDouble(increment), Double.parseDouble(minimumPrice), description, memberid,type, properties);
             System.out.println("itemName: "+itemName+" type: "+type+" initialPrice: "+initialPrice+" enddate: "+enddate+" increment: "+increment+" minimumPrice: "+minimumPrice+" description: "+description);
             System.out.println("submitform");

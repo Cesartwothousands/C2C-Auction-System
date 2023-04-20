@@ -122,7 +122,7 @@ public class PropertyDao extends Dao{
         //get property id from mydb.property
         Connection con = getConnection();
         String sql = "select idproperty from mydb.property where name=? and type=?";
-        String sql2 = "insert into mydb.itemProperty(idItem,idproperty,description) values(?,?,?)";
+        String sql2 = "insert into mydb.itemProperty(idItem,idproperty,describtion) values(?,?,?)";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, property.getName());

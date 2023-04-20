@@ -90,8 +90,8 @@ public class AdminDao extends Dao{
     }
     public Item bestSellingItems(){
         Connection con = getConnection();
-        String sql = "select name,max(cur_price) from " +
-                "(select idItem,sum(currentprice) as cur_price from (select * from mydb.auction where currentprice >= minimumprice and enddate>= CURDATE()) as t group by name) as a;";
+        String sql = "select idItem,max(cur_price) from " +
+                "(select idItem,sum(currentprice) as cur_price from (select * from mydb.auction where currentprice >= minimumprice and enddate>= CURDATE()) as t group by idItem) as a group by idItem;";
         Item result=null;
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -110,8 +110,8 @@ public class AdminDao extends Dao{
     public List<Object> bestBuyer(){
         String selledItems="select idItem,currentPrice from mydb.auction where currentprice >= minimumprice and enddate>= CURDATE()";
         String buyerId="select idUser,price from mydb.bid join ("+selledItems+") as t on bid.idItem=t.idItem where bid.price=t.currentPrice";
-        String buyerSpending="select idUser,sum(price) from mydb.end_user join ("+buyerId+") as A on end_user.idUser=A.idUser group by idUser";
-        String bestBuyer="select idUser,max(price) from ("+buyerSpending+") as B";
+        String buyerSpending="select A.idUser,sum(price) as price from mydb.end_user join ("+buyerId+") as A on end_user.idUser=A.idUser group by idUser";
+        String bestBuyer="select idUser,max(price) from ("+buyerSpending+") as B group by idUser";
         Connection con = getConnection();
         List<Object> result=new ArrayList<>();
         try{
@@ -128,5 +128,19 @@ public class AdminDao extends Dao{
             e.printStackTrace();
         }
         return result;
+    }
+    public void createCutomerRep(String name,String email,String password){
+        Connection con = getConnection();
+        String sql = "insert into mydb.representatives (username,email,password) values (?,?,?);";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,name);
+            ps.setString(2,email);
+            ps.setString(3,password);
+            ps.executeUpdate();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
