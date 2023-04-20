@@ -1,13 +1,7 @@
 package view;
 
-import controller.AlertDao;
-import controller.AutoBidDao;
-import controller.BidDao;
-import controller.RegisterDao;
-import model.Alert;
-import model.AutoBid;
-import model.Bid;
-import model.Member;
+import controller.*;
+import model.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,10 +36,12 @@ public class UserProfile extends HttpServlet {
         List<Alert> alerts=new AlertDao().getAlertByMember(n);
         List<AutoBid> autoBids=new AutoBidDao().getAutoBitByUser(n);
         List<Bid> bids=new BidDao().getBidByUser(n);
+        List<Item> activeItems=new AlertDao().getActiveAlertByMember(n);
         //System.out.println("alerts len: " + alerts.size()+ " autoBids len: " + autoBids.size() + " bids len: " + bids.size());
         request.setAttribute("alerts", alerts);
         request.setAttribute("autoBids", autoBids);
         request.setAttribute("bids", bids);
+        request.setAttribute("activeItems", activeItems);
         request.getRequestDispatcher("user_profile.jsp").forward(request, response);
     }
 
@@ -62,9 +58,11 @@ public class UserProfile extends HttpServlet {
         List<Alert> alerts=new AlertDao().getAlertByMember(n);
         List<AutoBid> autoBids=new AutoBidDao().getAutoBitByUser(n);
         List<Bid> bids=new BidDao().getBidByUser(n);
+        List<Item> activeItems=new AlertDao().getActiveAlertByMember(n);
         request.setAttribute("alerts", alerts);
         request.setAttribute("autoBids", autoBids);
         request.setAttribute("bids", bids);
+        request.setAttribute("activeItems", activeItems);
         request.getRequestDispatcher("user_profile.jsp").forward(request, response);
     }
 }

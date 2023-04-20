@@ -1,9 +1,6 @@
 package controller;
 
-import model.Alert;
-import model.Member;
-import model.Property;
-import model.Type;
+import model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -77,5 +74,25 @@ public class AlertDao extends Dao{
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+    public List<Item> getActiveAlertByMember(Member member){
+        Connection con=getConnection();
+        String getUserId="select idUser from mydb.end_user where email=?";
+        String getAlert="select (idalert,idUser,ItemName) from mydb.alert where idUser in ("+getUserId+")";
+        //An active alert is an alert that has the corresponding itemName in the auction table
+        String getActiveAlert="select idItem from mydb.auction where name in ("+getAlert+")";
+        List<Item> items=new ArrayList<>();
+        try{
+            PreparedStatement ps=con.prepareStatement(getActiveAlert);
+            ps.setString(1,member.getEmail());
+            ResultSet rs=ps.executeQuery();
+            while(rs!=null&&rs.next()){
+                int id=rs.getInt(1);
+                items.add(new ItemDao().getItem(id));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return items;
     }
 }

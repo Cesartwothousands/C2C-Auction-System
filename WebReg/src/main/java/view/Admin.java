@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.AdminDao;
 import model.Item;
@@ -22,14 +23,21 @@ public class Admin extends HttpServlet {
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AdminDao adminDao = new AdminDao();
+        HttpSession session=request.getSession(false);
+        //check if the visitor is admin
+        //Member n=(Member)session.getAttribute("Member");
         HashMap<String, Double> itemEarnings = adminDao.earningsPerItem();
         HashMap<String, Double> typeEarnings = adminDao.earningsPerType();
         HashMap<String, Double> sellerEarnings = adminDao.earningsPerSeller();
         Double totalEarnings = adminDao.totalEarnings();
         Item item = adminDao.bestSellingItems();
         List<Object> result=adminDao.bestBuyer();
-        Member bestBuyer=(Member)result.get(0);
-        Double bestBuyerSpending=(Double)result.get(1);
+        Member bestBuyer=null;
+        Double bestBuyerSpending=null;
+        if(result.size()>0){
+            bestBuyer=(Member)result.get(0);
+            bestBuyerSpending=(Double)result.get(1);
+        }
         request.setAttribute("itemEarnings", itemEarnings);
         request.setAttribute("typeEarnings", typeEarnings);
         request.setAttribute("sellerEarnings", sellerEarnings);
@@ -40,6 +48,13 @@ public class Admin extends HttpServlet {
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+        //check if the visitor is admin
+        HttpSession session=request.getSession(false);
+        //Member n=(Member)session.getAttribute("Member");
+        String uname=request.getParameter("name");
+        String password=request.getParameter("password");
+        String email=request.getParameter("email");
+        new AdminDao().createCutomerRep(uname, password, email);
+        response.getWriter().println("Customer Representative Created");
     }
 }

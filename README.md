@@ -7,10 +7,10 @@
     - [ ] logout.
     
 ### I. Auctions
-- [ ] seller creates auctions and posts items for sale (WYT)
-    - [ ] set all the characteristics of the item
-    - [ ] set closing date and time
-    - [ ] set a hidden minimum price (reserve)
+- [x] seller creates auctions and posts items for sale (WYT)
+    - [x] set all the characteristics of the item
+    - [x] set closing date and time
+    - [x] set a hidden minimum price (reserve)
 
 - [ ] a buyer should be able to bid
     - [ ] let the buyer set a new bid
@@ -35,30 +35,31 @@
     - [ ] view all the history of bids for any specific auction
     - [ ] view the list of all auctions a specific buyer or seller has participated in
     - [ ] view the list of "similar" items on auctions in the preceding month (and auction information about them)
-- [ ] let user set an alert for specific items s/he is interested (WYT)
-    - [ ] get an alert when the item becomes available
+- [x] let user set an alert for specific items s/he is interested (WYT)
+    - [x] get an alert when the item becomes available
 
 Discussion board
 - [ ] users browse questions and answers
 - [ ] users search questions by keywords
 
 ### III. Admin and customer rep functions
-- [ ] Admin (create an admin account ahead of time) (WYT)
-    - [ ] creates accounts for customer representatives
-    - [ ] generates sales reports for:
-        - [ ] total earnings
-        - [ ] earnings per:
-            - [ ] item
-            - [ ] item type
-            - [ ] end-user
-        - [ ] best-selling items
-        - [ ] best buyers
+- [x] Admin (create an admin account ahead of time) (WYT)
+    - [x] creates accounts for customer representatives
+    - [x] generates sales reports for:
+        - [x] total earnings
+        - [x] earnings per:
+            - [x] item
+            - [x] item type
+            - [x] end-user
+        - [x] best-selling items
+        - [x] best buyers
 - [ ] Customer representative functions:
     - [ ] users post questions to the customer representatives (i.e. customer service)
     - [ ] reps reply to user questions
     - [ ] edits and deletes account information
     - [ ] removes bids 
     - [ ] removes auctions
+- [ ] Custom representative login (WYT)
 
 ## WYT
 Auction Seller 

@@ -56,13 +56,39 @@
     %>
         </table>
     <h3>Total Earnings </h3>
-        <%=(Double)request.getAttribute("totalEarnings")%>
+        <%=(Double)request.getAttribute("totalEarnings")==null?0:(Double)request.getAttribute("totalEarnings") %>
     <h3>Best selling item </h3>
-        Name: <%=(Item)request.getAttribute("item").getName()%>
+        Name: <%=(Item)request.getAttribute("item")==null?"":((Item)request.getAttribute("item")).getName()%>
         </br>
-        Price: <%=(Item)request.getAttribute("item").getCurrentPrice()%>
+        Price: <%=(Item)request.getAttribute("item")==null?0:((Item)request.getAttribute("item")).getCurrentPrice()%>
     <h3>Best Buyer </h3>
-        Name: <%=(Member)request.getAttribute("bestBuyer").getUname()%>
+        Name: <%=(Member)request.getAttribute("bestBuyer")==null?"":((Member)request.getAttribute("bestBuyer")).getUname()%>
         </br>
         Total Spent: <%=(Double)request.getAttribute("bestBuyerSpending")%>
+        </br>
+        <form action="Admin" method="post">
+
+    <table>
+                        <tr>
+                            <input type="text" id="name_inputField" name="name" placeholder="Name">
+                        </tr>
+                        <br>
+
+                        <tr>
+                            <input type="password" id="password_inputField" name="password" placeholder="Password">
+                        </tr>
+
+                        <br>
+
+                        <tr>
+                            <input type="email" name="email" placeholder="Email">
+                        </tr>
+
+                        <br>
+                        <tr>
+                            <input type="submit" value="create">
+                        </tr>
+
+                    </table>
+     </form>
 </body>
