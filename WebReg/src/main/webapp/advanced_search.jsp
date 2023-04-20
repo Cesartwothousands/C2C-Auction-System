@@ -51,21 +51,6 @@
 
         <div class="container_3">
 
-            <script>
-                function validateForm() {
-                    const form = document.querySelector('form');
-                    const inputs = form.querySelectorAll('input[type="text"], input[type="number"], input[type="date"]');
-
-                    for (const input of inputs) {
-                        if (input.value.trim() === '') {
-                            input.name = '';
-                        }
-                    }
-
-                    return true;
-                }
-            </script>
-
             <form action="/webreg/AdvancedSearch" method="GET" onsubmit="return validateForm();">
 
 
