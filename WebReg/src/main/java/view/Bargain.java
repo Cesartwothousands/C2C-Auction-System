@@ -14,13 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(value = "/Bargain")
 public class Bargain extends HttpServlet {
 
-    List<TableItem> tableItemList;
+    TableItem tableItem;
     int currentPrice;
     int id;
     BargainDao bargainDao;
@@ -46,12 +47,12 @@ public class Bargain extends HttpServlet {
         }*/
 
         bargainDao = new BargainDao();
-        tableItemList = bargainDao.get(id);
-
+        tableItem = bargainDao.get(id);
+        List<TableItem> tableItems = new ArrayList<>();
+        tableItems.add(tableItem);
         // Convert the tableItems list to JSON
         Gson gson = new Gson();
-        String tableItemsJson = gson.toJson(tableItemList);
-
+        String tableItemsJson = gson.toJson(tableItems);
         request.setAttribute("tableItemsJson", tableItemsJson);
         request.getRequestDispatcher("bargain.jsp").forward(request, response);
     }
@@ -60,8 +61,8 @@ public class Bargain extends HttpServlet {
         currentPrice = Integer.parseInt(request.getParameter("currentPrice"));
         String result;
 
-        double initialPrice = tableItemList.get(0).getInitialPrice();
-        double increment = tableItemList.get(0).getIncrement();
+        double initialPrice = tableItem.getInitialPrice();
+        double increment = tableItem.getIncrement();
         if (currentPrice - initialPrice < increment){
             result = "increment can't be less than initial increment!";
         }

@@ -1,29 +1,22 @@
 <%--
   Created by IntelliJ IDEA.
   User: qipanxu
-  Date: 4/13/23
-  Time: 10:35 PM
+  Date: 4/19/23
+  Time: 3:19 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Auction Page</title>
+    <title>History Record Page</title>
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
-    <link rel="stylesheet" href="./style_bargain.css">
+    <link rel="stylesheet" href="./style_history.css">
 </head>
 <body>
-    <div class="container">
-        <form action="Bargain" method="post">
-            <table>
-                <tr>
-                    <input type="text" id="bargain_price" name="currentPrice" placeholder="please input your bid">
-                </tr>
-                <tr>
-                    <input type="submit" value="Place Bid">
-                </tr>
-            </table>
-        </form>
+    <div class = "container">
+        <h1>
+            Your History Record
+        </h1>
     </div>
 
     <div class="container_2">
@@ -32,30 +25,31 @@
 
         <script>
             var columnDefs = [
-                { headerName: "Name", field: "a", sortable: true, flex: 1 },
-                { headerName: "Initial Price", field: "b", sortable: true, flex: 1 },
-                { headerName: "Increment", field: "c", sortable: true, flex: 1 },
-                { headerName: "Current Price", field: "d", sortable: true, flex: 1 },
+                { headerName: "UserName", field: "a", sortable: true, flex: 1 },
+                { headerName: "ItemName", field: "b", sortable: true, flex: 1 },
+                { headerName: "Type", field: "c", sortable: true, flex: 1 },
+                { headerName: "Bid Price", field: "d", sortable: true, flex: 1 },
                 { headerName: "End date", field: "e", sortable: true, flex: 1 },
-                { headerName: "Description", field: "f", sortable: true, flex: 1 },
+                { headerName: "Seller", field: "f", sortable: true, flex: 1 },
             ];
 
             // Data
             // Get the tableItemsJson attribute from the request object
-            var tableItemsJson = '<%= request.getAttribute("tableItemsJson") %>';
+            var tableItemsJson = '<%= request.getAttribute("historyJson") %>';
+            // console.log(historyJson);
 
             // Parse the JSON string into a JavaScript object
             var tableItems = JSON.parse(tableItemsJson) || [];
-
+            console.log(tableItems);
             // Convert the tableItems object to the format expected by rowData
             var rowData = tableItems.map(function (item) {
                 return {
-                    a: item.name,
-                    b: item.initialPrice,
-                    c:item.increment,
-                    d: item.currentPrice,
-                    e: item.endDate,
-                    f: item.description
+                    a: item.userName,
+                    b: item.itemName,
+                    c: item.itemType,
+                    d: item.bid_price,
+                    e: item.end_date,
+                    f: item.seller,
                 };
             });
 
