@@ -37,11 +37,15 @@ public class UserProfile extends HttpServlet {
         List<AutoBid> autoBids=new AutoBidDao().getAutoBitByUser(n);
         List<Bid> bids=new BidDao().getBidByUser(n);
         List<Item> activeItems=new AlertDao().getActiveAlertByMember(n);
+        List<Item> badBids=new AlertDao().getBadBidByMember(n);
+        List<Item> badAutoBids=new AlertDao().getBadAutoBidByMember(n);
         //System.out.println("alerts len: " + alerts.size()+ " autoBids len: " + autoBids.size() + " bids len: " + bids.size());
         request.setAttribute("alerts", alerts);
         request.setAttribute("autoBids", autoBids);
         request.setAttribute("bids", bids);
         request.setAttribute("activeItems", activeItems);
+        request.setAttribute("badBids", badBids);
+        request.setAttribute("badAutoBids", badAutoBids);
         request.getRequestDispatcher("user_profile.jsp").forward(request, response);
     }
 
@@ -59,10 +63,14 @@ public class UserProfile extends HttpServlet {
         List<AutoBid> autoBids=new AutoBidDao().getAutoBitByUser(n);
         List<Bid> bids=new BidDao().getBidByUser(n);
         List<Item> activeItems=new AlertDao().getActiveAlertByMember(n);
+        List<Item> badBids=new AlertDao().getBadBidByMember(n);
+        List<Item> badAutoBids=new AlertDao().getBadAutoBidByMember(n);
         request.setAttribute("alerts", alerts);
         request.setAttribute("autoBids", autoBids);
         request.setAttribute("bids", bids);
         request.setAttribute("activeItems", activeItems);
+        request.setAttribute("badBids", badBids);
+        request.setAttribute("badAutoBids", badAutoBids);
         request.getRequestDispatcher("user_profile.jsp").forward(request, response);
     }
 }

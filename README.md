@@ -59,7 +59,7 @@ Discussion board
     - [ ] edits and deletes account information
     - [ ] removes bids 
     - [ ] removes auctions
-- [ ] Custom representative login (WYT)
+- [x] Custom representative login (WYT)
 
 ## WYT
 Auction Seller 
