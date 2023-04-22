@@ -26,10 +26,10 @@
             - [ ] alert the winner that they won the auction
 
 ### II. Browsing and advanced search functionality
-- [ ] (CZH) <u>let people browse on the items</u> and see the status of the current bidding (Precisly Bidding)
-- [ ] (CZH) sort by different criteria (by type, bidding price etc.) (Make Property in it)
-- [ ] (CZH) search the list of items by various criteria.
-    current price, auction enddate, bid price, item type, property name, seller name, 
+- [x] <u>let people browse on the items</u> and see the status of the current bidding (Precisly Bidding) (CZH) ??
+- [x] sort by different criteria (by type, bidding price etc.) (Make Property in it) (CZH)
+- [x] search the list of items by various criteria. (CZH)
+    current price, auction enddate, bid price, item type, property name, seller name, (CZH)
 
 - [ ] a user should be able to:
     - [ ] view all the history of bids for any specific auction
@@ -39,8 +39,8 @@
     - [x] get an alert when the item becomes available
 
 Discussion board
-- [ ] users browse questions and answers
-- [ ] users search questions by keywords
+- [x] users browse questions and answers (CZH)
+- [x] users search questions by keywords (CZH)
 
 ### III. Admin and customer rep functions
 - [x] Admin (create an admin account ahead of time) (WYT)
@@ -54,13 +54,21 @@ Discussion board
         - [x] best-selling items
         - [x] best buyers
 - [ ] Customer representative functions:
-    - [ ] users post questions to the customer representatives (i.e. customer service)
-    - [ ] reps reply to user questions
-    - [ ] edits and deletes account information
-    - [ ] removes bids 
-    - [ ] removes auctions
+    - [x] users post questions to the customer representatives (i.e. customer service) (CZH)
+    - [ ] reps reply to user questions (CZH)
+//
+    - [ ] edits and deletes account information (CZH)
+    - [ ] removes bids (CZH)
+    - [ ] removes auctions (CZH)
 - [ ] Custom representative login (WYT)
 
+
+-----
+
+- [ ] Sample Data
+- [ ] Insert Data
+
+-----
 ## WYT
 Auction Seller 
 Browser5
@@ -73,9 +81,3 @@ Browser4
 ## CZH
 Browser1-3 67
 Customer Rep
-Insert Data
-
-Goal: This weekend
-
-
-Define winner  Admin Buy

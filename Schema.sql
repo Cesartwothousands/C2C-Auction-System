@@ -193,14 +193,17 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`question` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`question` (
-  `idquestion` INT NOT NULL,
+  `idquestion` INT NOT NULL AUTO_INCREMENT,
   `idUser` INT NOT NULL,
   `idAdmin` INT NULL,
   `question` LONGTEXT NOT NULL,
   `answer` LONGTEXT NULL,
+  `questionTitle` VARCHAR(45) NULL,
+  `answerTitle` VARCHAR(45) NULL,
   PRIMARY KEY (`idquestion`),
   INDEX `question_repre_idx` (`idAdmin` ASC) VISIBLE,
-  INDEX `question_user_idx` (`idUser` ASC) VISIBLE,
+  INDEX `question_user_idx` (`idUser` ASC) INVISIBLE,
+  FULLTEXT INDEX `searchQuestion` (`question`, `answer`, `questionTitle`, `answerTitle`) VISIBLE,
   CONSTRAINT `question_repre`
     FOREIGN KEY (`idAdmin`)
     REFERENCES `mydb`.`representatives` (`idRep`)

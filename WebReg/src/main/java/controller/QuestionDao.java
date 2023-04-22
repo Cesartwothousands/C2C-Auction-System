@@ -68,26 +68,33 @@ public class QuestionDao extends Dao {
             e.printStackTrace();
         }
 
-        return questionItems;
-    }
+        if (questionItems.isEmpty()) {
+            sql = "SELECT * FROM mydb.question WHERE MATCH(questiontitle, question) AGAINST(? IN BOOLEAN MODE);";
+            try {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setString(1, query);
+                ResultSet rs = ps.executeQuery();
 
-    public String getUserName(Integer idUser) {
-        String sql = "SELECT name FROM mydb.end_user WHERE idUser = ?";
-        String username = "";
+                while (rs != null && rs.next()) {
+                    Integer idquestion = rs.getInt("idquestion");
+                    Integer idUser = rs.getInt("idUser");
+                    String username = getUserName(idUser);
+                    String questionTitle = rs.getString("questiontitle");
+                    String question = rs.getString("question");
+                    String answerTitle = rs.getString("answertitle");
+                    String answer = rs.getString("answer");
 
-        try (Connection con = getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, idUser);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                username = rs.getString("name");
+                    QuestionItem questionItem = new QuestionItem(idquestion, username, questionTitle, question,
+                            answerTitle,
+                            answer);
+                    questionItems.add(questionItem);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
-        return username;
+        return questionItems;
     }
 
     public void insertQuestion(String questionTitle, String question, Integer idUser) {
@@ -116,5 +123,43 @@ public class QuestionDao extends Dao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getUserName(Integer idUser) {
+        String sql = "SELECT name FROM mydb.end_user WHERE idUser = ?";
+        String username = "";
+
+        try (Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, idUser);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                username = rs.getString("name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return username;
+    }
+
+    public Integer getIdUser(String Email) {
+        String sql = "SELECT idUser FROM mydb.end_user WHERE email = ?";
+        Integer idUser = 0;
+
+        try (Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, Email);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                idUser = rs.getInt("idUser");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idUser;
     }
 }
