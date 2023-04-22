@@ -54,14 +54,14 @@ Discussion board
         - [x] best-selling items
         - [x] best buyers
 - [ ] Customer representative functions:
+
     - [x] users post questions to the customer representatives (i.e. customer service) (CZH)
     - [ ] reps reply to user questions (CZH)
 //
     - [ ] edits and deletes account information (CZH)
     - [ ] removes bids (CZH)
     - [ ] removes auctions (CZH)
-- [ ] Custom representative login (WYT)
-
+- [x] Custom representative login (WYT)
 
 -----
 

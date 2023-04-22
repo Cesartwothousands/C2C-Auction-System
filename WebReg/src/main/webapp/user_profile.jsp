@@ -73,6 +73,34 @@
         <%
         }
         %>
+    <h3>item that a higher bid has been placed</h3>
+        <table>
+            <%
+            List<Item> badBids= (List<Item>) request.getAttribute("badBids");
+            for(Item item:badBids)
+            {
+            %>
+            <tr>
+              <td><%=item.getName()%></td>
+              <td><%=item.toString()%></td>
+            </tr>
+            <%
+            }
+            %>
+    <h3>someone bids more than your auto bid upper limit</h3>
+        <table>
+            <%
+            List<Item> badAutoBids= (List<Item>) request.getAttribute("badAutoBids");
+            for(Item item:badAutoBids)
+            {
+            %>
+            <tr>
+              <td><%=item.getName()%></td>
+              <td><%=item.toString()%></td>
+            </tr>
+            <%
+            }
+            %>
 </div>
 </body>
 </html>

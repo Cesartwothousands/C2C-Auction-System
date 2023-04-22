@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.AdminDao;
+import controller.RepDao;
 import model.Item;
 import model.Member;
 
@@ -54,7 +55,7 @@ public class Admin extends HttpServlet {
         String uname=request.getParameter("name");
         String password=request.getParameter("password");
         String email=request.getParameter("email");
-        new AdminDao().createCutomerRep(uname, password, email);
+        new RepDao().createCustomerRep(uname, email, password);
         response.getWriter().println("Customer Representative Created");
     }
 }

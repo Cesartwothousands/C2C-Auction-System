@@ -1,26 +1,21 @@
 package view;
 
+import controller.MemberDao;
+import controller.RepDao;
 import model.CustomerRep;
 import model.Member;
 
-import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
-/**
- * Servlet implementation class Register
- */
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
-
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Logout() {
+@WebServlet("/CRLogin")
+public class CRLogin extends HttpServlet {
+    public CRLogin() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,14 +25,7 @@ public class Logout extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        HttpSession session=request.getSession(false);
-        Member n=(Member)session.getAttribute("Member");
-        CustomerRep c=(CustomerRep)session.getAttribute("CustomerRep");
-        if (n!=null)
-            request.setAttribute("email", n.getEmail());
-        else if (c!=null)
-            request.setAttribute("email", c.getEmail());
-        request.getRequestDispatcher("logout.jsp").forward(request, response);
+        response.sendRedirect("crlogin.jsp");
     }
 
     /**
@@ -45,8 +33,17 @@ public class Logout extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // String uid = request.getParameter("email");
-        HttpSession session=request.getSession();
-        session.invalidate();
-        response.sendRedirect("login.jsp");
+        String password=request.getParameter("password");
+        String email=request.getParameter("email");
+        // String phone=request.getParameter("phone");
+        RepDao rdao=new RepDao();
+        CustomerRep result=rdao.getCustomerRep(email,password);
+        if(result!=null){
+            HttpSession session=request.getSession();
+            session.setAttribute("CustomerRep",result);
+            response.sendRedirect("Logout");
+        }else {
+            response.getWriter().println("Not found");
+        }
     }
 }
