@@ -53,14 +53,13 @@ Discussion board
             - [x] end-user
         - [x] best-selling items
         - [x] best buyers
-- [ ] Customer representative functions:
+- [x] Customer representative functions:
 
     - [x] users post questions to the customer representatives (i.e. customer service) (CZH)
-    - [ ] reps reply to user questions (CZH)
-//
-    - [ ] edits and deletes account information (CZH)
-    - [ ] removes bids (CZH)
-    - [ ] removes auctions (CZH)
+    - [x] reps reply to user questions (CZH)
+    - [x] edits and deletes account information (CZH)
+    - [x] removes bids (CZH)
+    - [x] removes auctions (CZH)
 - [x] Custom representative login (WYT)
 
 -----

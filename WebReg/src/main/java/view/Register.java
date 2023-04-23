@@ -26,34 +26,38 @@ public class Register extends HttpServlet {
     }
 
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        response.sendRedirect("index.jsp");
     }
 
     /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-        String uname=request.getParameter("name");
-        String password=request.getParameter("password");
-        String email=request.getParameter("email");
+        String uname = request.getParameter("name");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
 
-        Member member=new Member(uname, password, email);
-        RegisterDao rdao=new RegisterDao();
+        Member member = new Member(uname, password, email);
+        RegisterDao rdao = new RegisterDao();
         String result;
 
-        if(uname=="" || password=="" || email==""){
-            result="Null values are not allowed!";
-        }else if(uname.length()>16){
-            result="Length of username should not longer than 16 characters!";
-        }else if(password.length()<6){
-            result="Length of username should not shorter than 6 characters!";
-        }else{
-            result=rdao.insert(member);
+        if (uname == "" || password == "" || email == "") {
+            result = "Null values are not allowed!";
+        } else if (uname.length() > 16) {
+            result = "Length of username should not longer than 16 characters!";
+        } else if (password.length() < 6) {
+            result = "Length of username should not shorter than 6 characters!";
+        } else {
+            result = rdao.insert(member);
         }
 
         response.getWriter().println(result);
