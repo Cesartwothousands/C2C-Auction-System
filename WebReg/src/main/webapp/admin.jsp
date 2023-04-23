@@ -6,10 +6,13 @@
 <meta charset="UTF-8">
 <%@ page import="model.*" %>
 <%@ page import="java.util.HashMap" %>
-<title>Sell </title>
+<link rel="stylesheet" href="./CSS/admin.css">
+<title>Admin </title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
+<div class="container">
+<h2>Admin Page</h2>
 <h3>Item Earnings </h3>
     <table>
     <%
@@ -59,13 +62,14 @@
         <%=(Double)request.getAttribute("totalEarnings")==null?0:(Double)request.getAttribute("totalEarnings") %>
     <h3>Best selling item </h3>
         Name: <%=(Item)request.getAttribute("item")==null?"":((Item)request.getAttribute("item")).getName()%>
-        </br>
+        <br/>
         Price: <%=(Item)request.getAttribute("item")==null?0:((Item)request.getAttribute("item")).getCurrentPrice()%>
     <h3>Best Buyer </h3>
         Name: <%=(Member)request.getAttribute("bestBuyer")==null?"":((Member)request.getAttribute("bestBuyer")).getUname()%>
-        </br>
+        <br/>
         Total Spent: <%=(Double)request.getAttribute("bestBuyerSpending")%>
-        </br>
+        <br/>
+        <h3>Create Customer Representative</h3>
         <form action="Admin" method="post">
 
     <table>
@@ -91,4 +95,5 @@
 
                     </table>
      </form>
+</div>
 </body>

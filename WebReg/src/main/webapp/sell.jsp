@@ -10,6 +10,7 @@
 <title>Sell </title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="sell.js"></script>
+<link rel="stylesheet" href="./CSS/admin.css">
 </head>
 <body>
 
@@ -44,8 +45,9 @@
              Description: <input type = "text" name = "description" />
              <br />
              Add A property:
+             <br />
               <div class="jumbotron jumbotron-fluid" id="dataAdd">
-                         <div class="container">
+                         <div class="subcontainer">
                              <div class="form-row">
                                <div class="form-group col-md-4">
                                  <label>Property</label>
@@ -73,10 +75,10 @@
 <script>
 function addRow(){
    console.log('adding row...');
-    var len=$('#dataAdd .container .form-row').length+1;
+    var len=$('#dataAdd .subcontainer .form-row').length+1;
     var type = document.getElementById("typeselect").value;
     // select properties based on type
-    $("#dataAdd .container:last").append('<div class="form-row">'+
+    $("#dataAdd .subcontainer:last").append('<div class="form-row">'+
                                          '<div class="form-group col-md-4">'+
                                          '<label>Property</label>'+
                                  '<select name="property'+len+'" id="selectproperty'+len+'">'+

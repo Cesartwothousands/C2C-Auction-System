@@ -1,10 +1,13 @@
 # C2C-Auction-System
 
 ## Checking List
-- [ ] Create accounts of users; 
-    - [ ] login
+
+- [ ] **Insert URL on each page**
+
+- [x] Create accounts of users; 
+    - [x] login
     之后发生什么
-    - [ ] logout.
+    - [x] logout.
     
 ### I. Auctions
 - [x] seller creates auctions and posts items for sale (WYT)
@@ -16,8 +19,8 @@
     - [ ] let the buyer set a new bid
     - [ ] in case of automatic bidding set secret upper limit and bid increment
     THIS alert 追踪购买情况
-    - [ ] alert other buyers of the item that a higher bid has been placed (manual)
-    - [ ] alert buyers in case someone bids more than their upper limit (automatic)
+    - [x] alert other buyers of the item that a higher bid has been placed (manual)
+    - [x] alert buyers in case someone bids more than their upper limit (automatic)
 
 - [ ] define the winner of the auction
     - [ ] when the closing time has come, check if the seller has set a reserve
