@@ -25,11 +25,21 @@ public class History extends HttpServlet {
         String email = "mauris.vel@outlook.edu";
         HistoryDao historyDao = new HistoryDao();
         int idUser = historyDao.getId(email);
-        List<HistoryBid> bidItems = historyDao.get(idUser);
+        String type = null;
+        type = req.getParameter("type");
+        List<HistoryBid> bidItems;
+
+        if (type == null){
+            bidItems = historyDao.get(idUser);
+        }
+        else{
+            bidItems = historyDao.get(idUser, type);
+        }
+
         // Convert the tableItems list to JSON
         Gson gson = new Gson();
         String historyJson = gson.toJson(bidItems);
-        System.out.println(historyJson);
+        // System.out.println(historyJson);
         req.setAttribute("historyJson", historyJson);
         req.getRequestDispatcher("history.jsp").forward(req, resp);
     }

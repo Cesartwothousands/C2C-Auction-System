@@ -17,7 +17,7 @@
         <form action="Bargain" method="post">
             <table>
                 <tr>
-                    <input type="text" id="bargain_price" name="currentPrice" placeholder="please input your bid">
+                    <input type="text" id="bargain_price" name="bidPrice" placeholder="please input your bid">
                 </tr>
                 <tr>
                     <input type="submit" value="Place Bid">

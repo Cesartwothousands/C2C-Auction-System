@@ -10,7 +10,7 @@ public class BargainDao extends Dao{
         super();
     }
 
-    public void update(double currentPrice, int id){
+    public void update(double bidPrice, int itemid){
         // we need to both update users' bidding history and currentPrice.
         Connection con = getConnection();
 
@@ -22,9 +22,9 @@ public class BargainDao extends Dao{
         try {
             PreparedStatement ps = con.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setDouble(1, id);
+            ps.setDouble(1, itemid);
             ps.setInt(2, idUser);
-            ps.setDouble(3, currentPrice);
+            ps.setDouble(3, bidPrice);
             ps.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -40,8 +40,8 @@ public class BargainDao extends Dao{
         try {
             PreparedStatement ps = con.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, id);
-            ps.setInt(2, id);
+            ps.setInt(1, itemid);
+            ps.setInt(2, itemid);
 
             ps.executeUpdate();
         } catch (SQLException e) {

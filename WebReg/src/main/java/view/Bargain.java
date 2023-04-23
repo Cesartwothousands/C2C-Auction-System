@@ -23,7 +23,7 @@ public class Bargain extends HttpServlet {
 
     TableItem tableItem;
     int currentPrice;
-    int id;
+    int itemid;
     BargainDao bargainDao;
 
     public Bargain() {
@@ -40,14 +40,14 @@ public class Bargain extends HttpServlet {
         /**
          * adjust id manually
          */
-        id = 2;
+        itemid = 2;
         /*if (pathInfo != null) {
             // id = pathInfo.charAt(1);
             id = 1;
         }*/
 
         bargainDao = new BargainDao();
-        tableItem = bargainDao.get(id);
+        tableItem = bargainDao.get(itemid);
         List<TableItem> tableItems = new ArrayList<>();
         tableItems.add(tableItem);
         // Convert the tableItems list to JSON
@@ -58,17 +58,17 @@ public class Bargain extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        currentPrice = Integer.parseInt(request.getParameter("currentPrice"));
+        int bidPrice = Integer.parseInt(request.getParameter("bidPrice"));
         String result;
 
-        double initialPrice = tableItem.getInitialPrice();
+        double currentPrice = tableItem.getCurrentPrice();
         double increment = tableItem.getIncrement();
-        if (currentPrice - initialPrice < increment){
+        if (bidPrice - currentPrice < increment){
             result = "increment can't be less than initial increment!";
         }
         else{
             result = "Successful bidding!";
-            bargainDao.update(currentPrice, id);
+            bargainDao.update(bidPrice, itemid);
         }
         response.getWriter().println(result);
     }

@@ -14,9 +14,19 @@
 </head>
 <body>
     <div class = "container">
-        <h1>
+        <h2>
             Your History Record
-        </h1>
+        </h2>
+        <form action="History" method="GET">
+            <table>
+                <tr>
+                    <input type="text" id="type_search" name="type" placeholder="search your type here">
+                </tr>
+                <tr>
+                    <input type="submit" value="Type Search">
+                </tr>
+            </table>
+        </form>
     </div>
 
     <div class="container_2">

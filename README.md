@@ -16,13 +16,13 @@
     - [x] set a hidden minimum price (reserve)
 
 - [ ] a buyer should be able to bid
-    - [ ] let the buyer set a new bid
+    - [x] let the buyer set a new bid  XQP
     - [ ] in case of automatic bidding set secret upper limit and bid increment
     THIS alert 追踪购买情况
     - [x] alert other buyers of the item that a higher bid has been placed (manual)
     - [x] alert buyers in case someone bids more than their upper limit (automatic)
 
-- [ ] define the winner of the auction
+- [ ] define the winner of the auction XQP
     - [ ] when the closing time has come, check if the seller has set a reserve
         - [ ] if yes: if the reserve is higher than the last bid none is the winner.
         - [ ] if no: whoever has the higher bid is the winner
@@ -35,9 +35,10 @@
     current price, auction enddate, bid price, item type, property name, seller name, (CZH)
 
 - [ ] a user should be able to:
-    - [ ] view all the history of bids for any specific auction
-    - [ ] view the list of all auctions a specific buyer or seller has participated in
-    - [ ] view the list of "similar" items on auctions in the preceding month (and auction information about them)
+    - [ ] view all the history of bids for any specific auction  XQP
+    - [ ] view the list of all auctions a specific buyer or seller has participated in XQP
+	TODO:
+    - [x] view the list of "similar" items on auctions in the preceding month (and auction information about them) XQP
 - [x] let user set an alert for specific items s/he is interested (WYT)
     - [x] get an alert when the item becomes available
 
