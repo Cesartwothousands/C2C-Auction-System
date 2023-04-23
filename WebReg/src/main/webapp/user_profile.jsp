@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <%@ page import="model.*" %>
 <%@ page import="java.util.List" %>
+<link rel="stylesheet" href="./CSS/admin.css">
 <title>Hello <%= ((Member)request.getAttribute("member")).getUname() %></title>
 </head>
 <body>
@@ -29,6 +30,7 @@
     <form action="UserProfile" method="post">
     <input type="text" name="itemName" />
     <input type="submit" value="Create" />
+    </form>
     <h3> Your Bid </h3>
     <table>
         <%
