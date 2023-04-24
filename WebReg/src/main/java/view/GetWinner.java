@@ -3,6 +3,7 @@ package view;
 
 import com.google.gson.Gson;
 import controller.WinnerDao;
+import model.Member;
 import model.Winner;
 
 import javax.servlet.ServletException;
@@ -23,7 +24,9 @@ public class GetWinner extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WinnerDao winnerDao = new WinnerDao();
-        List<Winner> winners =  winnerDao.get();
+        // manual member for test
+        Member member = new Member("Gareth Bruce", "123456", "sb@gmail.com");
+        List<Winner> winners =  winnerDao.get(member);
 
         //Convert the tableItems to JSON
         Gson gson = new Gson();
