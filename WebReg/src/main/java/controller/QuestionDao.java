@@ -43,12 +43,13 @@ public class QuestionDao extends Dao {
 
     public List<QuestionItem> get(String query) {
         Connection con = getConnection();
-        String sql = "SELECT * FROM mydb.question WHERE MATCH(questiontitle, question, answertitle, answer) AGAINST(? IN BOOLEAN MODE);";
+        String sql = "SELECT * FROM mydb.question WHERE MATCH(question,answer,questionTitle,answerTitle) AGAINST(? IN BOOLEAN MODE);";
         List<QuestionItem> questionItems = new ArrayList<>();
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, query);
+            System.out.println(query);
             ResultSet rs = ps.executeQuery();
 
             while (rs != null && rs.next()) {
@@ -66,32 +67,6 @@ public class QuestionDao extends Dao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        if (questionItems.isEmpty()) {
-            sql = "SELECT * FROM mydb.question WHERE MATCH(questiontitle, question) AGAINST(? IN BOOLEAN MODE);";
-            try {
-                PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, query);
-                ResultSet rs = ps.executeQuery();
-
-                while (rs != null && rs.next()) {
-                    Integer idquestion = rs.getInt("idquestion");
-                    Integer idUser = rs.getInt("idUser");
-                    String username = getUserName(idUser);
-                    String questionTitle = rs.getString("questiontitle");
-                    String question = rs.getString("question");
-                    String answerTitle = rs.getString("answertitle");
-                    String answer = rs.getString("answer");
-
-                    QuestionItem questionItem = new QuestionItem(idquestion, username, questionTitle, question,
-                            answerTitle,
-                            answer);
-                    questionItems.add(questionItem);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
 
         return questionItems;

@@ -17,8 +17,6 @@ USE `mydb` ;
 -- -----------------------------------------------------
 -- Table `mydb`.`end_user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`end_user` ;
-
 CREATE TABLE IF NOT EXISTS `mydb`.`end_user` (
   `idUser` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(16) NOT NULL,
@@ -33,8 +31,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`auction`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`auction` ;
-
 CREATE TABLE IF NOT EXISTS `mydb`.`auction` (
   `idItem` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
@@ -60,8 +56,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`bid`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`bid` ;
-
 CREATE TABLE IF NOT EXISTS `mydb`.`bid` (
   `idItem` INT NOT NULL,
   `idUser` INT NOT NULL,
@@ -84,8 +78,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`autobid`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`autobid` ;
-
 CREATE TABLE IF NOT EXISTS `mydb`.`autobid` (
   `idItem` INT NOT NULL,
   `idUser` INT NOT NULL,
@@ -108,22 +100,19 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`representatives`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`representatives` ;
-
 CREATE TABLE IF NOT EXISTS `mydb`.`representatives` (
   `idRep` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(16) NOT NULL,
-  `email` VARCHAR(255) NULL,
+  `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(32) NOT NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idRep`));
+  PRIMARY KEY (`idRep`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`administrative_stuff`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`administrative_stuff` ;
-
 CREATE TABLE IF NOT EXISTS `mydb`.`administrative_stuff` (
   `username` VARCHAR(16) NOT NULL,
   `email` VARCHAR(255) NULL,
@@ -134,8 +123,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`administrative_stuff` (
 -- -----------------------------------------------------
 -- Table `mydb`.`property`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`property` ;
-
 CREATE TABLE IF NOT EXISTS `mydb`.`property` (
   `idproperty` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
@@ -147,8 +134,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`itemProperty`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`itemProperty` ;
-
 CREATE TABLE IF NOT EXISTS `mydb`.`itemProperty` (
   `idItem` INT NOT NULL,
   `idproperty` INT NOT NULL,
@@ -171,8 +156,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`alert`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`alert` ;
-
 CREATE TABLE IF NOT EXISTS `mydb`.`alert` (
   `idalert` INT NOT NULL AUTO_INCREMENT,
   `idUser` INT NOT NULL,
@@ -190,20 +173,19 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`question`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`question` ;
-
 CREATE TABLE IF NOT EXISTS `mydb`.`question` (
   `idquestion` INT NOT NULL AUTO_INCREMENT,
   `idUser` INT NOT NULL,
   `idAdmin` INT NULL,
   `question` LONGTEXT NOT NULL,
   `answer` LONGTEXT NULL,
-  `questionTitle` VARCHAR(45) NULL,
-  `answerTitle` VARCHAR(45) NULL,
+  `questionTitle` LONGTEXT NOT NULL,
+  `answerTitle` LONGTEXT NULL,
   PRIMARY KEY (`idquestion`),
   INDEX `question_repre_idx` (`idAdmin` ASC) VISIBLE,
   INDEX `question_user_idx` (`idUser` ASC) INVISIBLE,
   FULLTEXT INDEX `searchQuestion` (`question`, `answer`, `questionTitle`, `answerTitle`) VISIBLE,
+  FULLTEXT INDEX `searchOnlyQuestion` (`question`, `questionTitle`) INVISIBLE,
   CONSTRAINT `question_repre`
     FOREIGN KEY (`idAdmin`)
     REFERENCES `mydb`.`representatives` (`idRep`)

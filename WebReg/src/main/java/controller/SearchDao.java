@@ -15,7 +15,7 @@ public class SearchDao extends Dao {
 
     public List<TableItem> get(String query) {
         Connection con = getConnection();
-        String sql = "SELECT * FROM mydb.auction WHERE MATCH(name, description, type) AGAINST(? IN BOOLEAN MODE);";
+        String sql = "SELECT * FROM mydb.auction WHERE MATCH(name, description, type) AGAINST(? IN BOOLEAN MODE) ORDER BY currentPrice;";
         List<TableItem> tableItems = new ArrayList<>();
 
         try {

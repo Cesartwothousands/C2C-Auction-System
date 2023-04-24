@@ -26,7 +26,8 @@
                         </td>
                         <td width="50%">
                             <a href="/webreg/Register">Customer Register</a><br>
-                            <a href="/webreg/Login">Customer Login</a>
+                            <a href="/webreg/Login">Customer Login</a><br>
+                            <a href="/webreg/Logout">Logout</a>
                         </td>
                     </tr>
                 </table>

@@ -11,7 +11,7 @@ public class ExploreDao extends Dao {
     public List<TableItem> get() {
         List<TableItem> tableItems = new ArrayList<>();
         Connection con = getConnection();
-        String sql = "SELECT * FROM mydb.auction ORDER BY endDate ASC LIMIT 25";
+        String sql = "SELECT * FROM mydb.auction WHERE endDate > NOW() ORDER BY endDate ASC LIMIT 25;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
