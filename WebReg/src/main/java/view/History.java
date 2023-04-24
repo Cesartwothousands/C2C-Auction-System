@@ -25,7 +25,7 @@ public class History extends HttpServlet {
         String email = "mauris.vel@outlook.edu";
         HistoryDao historyDao = new HistoryDao();
         int idUser = historyDao.getId(email);
-        String type = null;
+        String type;
         type = req.getParameter("type");
         List<HistoryBid> bidItems;
 

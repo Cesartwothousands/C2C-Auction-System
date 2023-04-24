@@ -23,9 +23,9 @@
     - [x] alert buyers in case someone bids more than their upper limit (automatic)
 
 - [ ] define the winner of the auction XQP
-    - [ ] when the closing time has come, check if the seller has set a reserve
-        - [ ] if yes: if the reserve is higher than the last bid none is the winner.
-        - [ ] if no: whoever has the higher bid is the winner
+    - [x] when the closing time has come, check if the seller has set a reserve
+        - [x] if yes: if the reserve is higher than the last bid none is the winner.
+        - [x] if no: whoever has the higher bid is the winner
             - [ ] alert the winner that they won the auction
 
 ### II. Browsing and advanced search functionality
@@ -34,9 +34,9 @@
 - [x] search the list of items by various criteria. (CZH)
     current price, auction enddate, bid price, item type, property name, seller name, (CZH)
 
-- [ ] a user should be able to:
-    - [ ] view all the history of bids for any specific auction  XQP
-    - [ ] view the list of all auctions a specific buyer or seller has participated in XQP
+	- [x] a user should be able to:
+    - [x] view all the history of bids for any specific auction  XQP
+    - [x] view the list of all auctions a specific buyer or seller has participated in XQP
 	TODO:
     - [x] view the list of "similar" items on auctions in the preceding month (and auction information about them) XQP
 - [x] let user set an alert for specific items s/he is interested (WYT)
