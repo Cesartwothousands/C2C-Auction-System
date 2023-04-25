@@ -54,10 +54,25 @@
             <div id="myGrid" style="width: 100%; height: 78vh; " class="ag-theme-alpine"></div>
 
             <script>
+                function NameCellRenderer() { }
+
+                NameCellRenderer.prototype.init = function (params) {
+                    this.eGui = document.createElement('div');
+                    var link = document.createElement('a');
+                    var itemId = params.node.data.id;
+                    link.href = 'http://localhost:8080/webreg/Bargain/' + itemId;
+                    link.innerText = params.value;
+                    this.eGui.appendChild(link);
+                };
+
+                NameCellRenderer.prototype.getGui = function () {
+                    return this.eGui;
+                };
+
                 // Table
 
                 var columnDefs = [
-                    { headerName: "Name", field: "a", sortable: true, flex: 1.5 },
+                    { headerName: "Name", field: "a", sortable: true, flex: 1.5, cellRenderer: NameCellRenderer },
                     { headerName: "End date", field: "b", sortable: true, flex: 1.5 },
                     { headerName: "Initial Price", field: "c", sortable: true, flex: 1 },
                     { headerName: "Current Price", field: "d", sortable: true, flex: 1 },
@@ -79,6 +94,7 @@
                 // Convert the tableItems object to the format expected by rowData
                 var rowData = tableItems.map(function (item) {
                     return {
+                        id: item.id,
                         a: item.name,
                         b: item.endDate,
                         c: item.initialPrice,

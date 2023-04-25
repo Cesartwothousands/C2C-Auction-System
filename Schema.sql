@@ -137,8 +137,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`itemProperty` (
   `idItem` INT NOT NULL,
   `idproperty` INT NOT NULL,
-  `describtion` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idItem`, `idproperty`, `describtion`),
+  `description` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idItem`, `idproperty`),
   INDEX `property_idx` (`idproperty` ASC) VISIBLE,
   CONSTRAINT `item_itemp`
     FOREIGN KEY (`idItem`)
