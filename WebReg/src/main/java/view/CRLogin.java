@@ -41,7 +41,7 @@ public class CRLogin extends HttpServlet {
         if(result!=null){
             HttpSession session=request.getSession();
             session.setAttribute("CustomerRep",result);
-            response.sendRedirect("Logout");
+            response.sendRedirect("CRhomepage");
         }else {
             response.getWriter().println("Not found");
         }

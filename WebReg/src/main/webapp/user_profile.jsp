@@ -10,6 +10,40 @@
 <title>Hello <%= ((Member)request.getAttribute("member")).getUname() %></title>
 </head>
 <body>
+<body>
+    <div class="header">
+            <!-- Navigation -->
+            <div class="Brand-Search">
+
+                <button class="ad-search-button">
+                    <a href="/webreg/Explore">
+                        <h1>
+                            C2C Auction System!
+                        </h1>
+                    </a>
+                </button>
+
+                <form class="search-form" action="/webreg/Search" method="GET">
+                    <input class="search-input" type="search" name="query" placeholder="Search Everything You Want"
+                        aria-label="Search">
+                    <button class="search-button" type="submit">Search</button>
+                </form>
+
+                <button class="ad-search-button">
+                    <a href="/webreg/AdvancedSearch">Advanced</a>
+                </button>
+            </div>
+            <nav class="nav-container">
+                <ul>
+                    <li class="nav-item"><a class="nav-link" href="/webreg/Explore">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/webreg/">Watch List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/webreg/">Sell Items</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/webreg/">Settings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/webreg">Register/Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    <div class="seperator"></div>
 <div class="container">
     <h3>Your Alert </h3>
     <table>
@@ -41,6 +75,7 @@
         <tr>
           <td><%=bid.getItem().getName()%></td>
           <td><%=bid.toString()%></td>
+          <td><a href="<%=bid.getItem().getLink()%>">Click here to Item</a></td>
         </tr>
         <%
         }
@@ -55,7 +90,8 @@
             %>
             <tr>
               <td><%=autoBid.getItem().getName()%></td>
-              <td><%=autoBid.toString()%></td>
+                <td><%=autoBid.toString()%></td>
+              <td><a href="<%=autoBid.getItem().getLink()%>">Click here to Item</a></td>
             </tr>
             <%
             }
@@ -71,6 +107,7 @@
         <tr>
           <td><%=item.getName()%></td>
           <td><%=item.toString()%></td>
+          <td><a href="<%=item.getLink()%>">Click here to Item</a></td>
         </tr>
         <%
         }
@@ -85,6 +122,7 @@
             <tr>
               <td><%=item.getName()%></td>
               <td><%=item.toString()%></td>
+              <td><a href="<%=item.getLink()%>">Click here to Item</a></td>
             </tr>
             <%
             }
@@ -99,10 +137,25 @@
             <tr>
               <td><%=item.getName()%></td>
               <td><%=item.toString()%></td>
+              <td><a href="<%=item.getLink()%>">Click here to Item</a></td>
             </tr>
             <%
             }
             %>
+    <h3>Your winning items</h3>
+        <table>
+            <%
+            List<Winner> winners= (List<Winner>) request.getAttribute("winners");
+            for(Winner winner:winners)
+            {
+            %>
+            <tr>
+              <td><%=winner.getItemName()%></td>
+            </tr>
+            <%
+            }
+            %>
+    <a href="Logout">Click here to logout</a>
 </div>
 </body>
 </html>

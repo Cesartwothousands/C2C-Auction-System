@@ -1,16 +1,14 @@
 body {
   background: linear-gradient(45deg, #2f004b 0%, #647dee 100%);
-  font-family: "Montserrat", sans-serif;
+  justify-content: center;
+  display: grid;
+  margin: 0;
 }
 
 .container {
     background: rgba(255, 255, 255, 0.25);
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
     overflow: hidden;
     width: 70vw;
     min-height: 100vh;
@@ -24,13 +22,13 @@ h3 {
     margin-left: 10px;
     color: white;
 }
-form {
+.container form {
   padding: 1em;
   text-align: center;
   position: relative;
 }
 
-form p {
+.container form p {
   font-weight: 500;
   color: #fff;
   opacity: 0.7;
@@ -40,21 +38,21 @@ form p {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-form a {
+.container form a {
   text-decoration: none;
   color: #ddd;
   font-size: 12px;
 }
 
-form a:hover {
+.container form a:hover {
   text-shadow: 2px 2px 6px #00000040;
 }
 
-form a:active {
+.container form a:active {
   text-shadow: none;
 }
 
-form input {
+.container form input {
   background: transparent;
   width: 200px;
   padding: 1em;
@@ -73,47 +71,47 @@ form input {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-form input:hover form div:hover {
+.container form input:hover form div:hover {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
 }
 
-form input[type=email]:focus,
-form input[type=password]:focus form input[type=text]:focus {
+.container form input[type=email]:focus,
+.container form input[type=password]:focus form input[type=text]:focus {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
 }
 
-form input[type=submit] {
+.container form input[type=submit] {
   margin-top: 10px;
   width: 150px;
   font-size: 1.2rem;
 }
 
-form input[type=submit]:hover {
+.container form input[type=submit]:hover {
   cursor: pointer;
 }
 
-form input[type=submit]:active {
+.container form input[type=submit]:active {
   background: rgba(255, 255, 255, 0.2);
 }
 
 
-::-moz-placeholder {
+.container ::-moz-placeholder {
   font-family: Montserrat, sans-serif;
   font-weight: 400;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-:-ms-input-placeholder {
+.container :-ms-input-placeholder {
   font-family: Montserrat, sans-serif;
   font-weight: 400;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-::placeholder {
+.container ::placeholder {
   font-family: Montserrat, sans-serif;
   font-weight: 400;
   font-size: 15px;
@@ -193,7 +191,7 @@ td{
   padding: 10px;
   text-align: center;
 }
-button{
+.container button{
         background: transparent;
         width: 200px;
         padding: 1em;
@@ -220,4 +218,72 @@ button:active {
 }
 select{
     background-color: transparent;
+}
+
+.Brand-Search {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand {
+    color: #12d833;
+    text-decoration: none;
+}
+
+.search-input {
+    width: 30vw;
+    height: 40px;
+}
+
+.search-form {
+    width: auto;
+}
+
+.search-button {
+    width: 10vw;
+    height: 40px;
+}
+
+.ad-search-button {
+    width: auto;
+    height: 40px;
+}
+
+.nav-container {
+    background: rgba(255, 255, 255, 0);
+    padding: 10px 0;
+}
+
+ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    text-align: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
+.header {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    top: 0;
+    overflow: hidden;
+    width: 70vw;
+    min-height: 18vh;
+}
+div.seperator{
+height: 35px;
 }

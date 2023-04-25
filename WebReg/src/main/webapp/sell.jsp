@@ -13,7 +13,40 @@
 <link rel="stylesheet" href="./CSS/admin.css">
 </head>
 <body>
+<body>
+    <div class="header">
+            <!-- Navigation -->
+            <div class="Brand-Search">
 
+                <button class="ad-search-button">
+                    <a href="/webreg/Explore">
+                        <h1>
+                            C2C Auction System!
+                        </h1>
+                    </a>
+                </button>
+
+                <form class="search-form" action="/webreg/Search" method="GET">
+                    <input class="search-input" type="search" name="query" placeholder="Search Everything You Want"
+                        aria-label="Search">
+                    <button class="search-button" type="submit">Search</button>
+                </form>
+
+                <button class="ad-search-button">
+                    <a href="/webreg/AdvancedSearch">Advanced</a>
+                </button>
+            </div>
+            <nav class="nav-container">
+                <ul>
+                    <li class="nav-item"><a class="nav-link" href="/webreg/Explore">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/webreg/">Watch List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/webreg/">Sell Items</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/webreg/">Settings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/webreg">Register/Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    <div class="seperator"></div>
 <div class="container">
     <h3>This is the sell page </h3>
     <form action = "Sell" method = "POST">

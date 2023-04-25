@@ -23,8 +23,15 @@ public class Admin extends HttpServlet {
         super();
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AdminDao adminDao = new AdminDao();
         HttpSession session=request.getSession(false);
+
+        if(session==null || session.getAttribute("verified")==null || !(boolean)session.getAttribute("verified")){
+            response.sendRedirect("adminlogin.jsp");
+            return;
+        }
+
+        AdminDao adminDao = new AdminDao();
+        session=request.getSession(false);
         //check if the visitor is admin
         //Member n=(Member)session.getAttribute("Member");
         HashMap<String, Double> itemEarnings = adminDao.earningsPerItem();

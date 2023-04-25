@@ -129,4 +129,20 @@ public class AdminDao extends Dao{
         }
         return result;
     }
+    public boolean verify(String email,String password){
+        Connection con = getConnection();
+        String sql = "select * from mydb.administrative_stuff where email=? and password=?";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,email);
+            ps.setString(2,password);
+            ResultSet rs =ps.executeQuery();
+            if(rs!=null&&rs.next()){
+                return true;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

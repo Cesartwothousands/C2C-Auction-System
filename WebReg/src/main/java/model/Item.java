@@ -124,4 +124,7 @@ public class Item {
         this.type = type;
     }
 
+    public String getLink() {
+        return "Bargain/"+itemId;
+    }
 }
