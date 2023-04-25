@@ -1,6 +1,23 @@
 package model;
 
 public class HistoryBid {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    int id;
     String userName;
     String itemName;
     String itemType;
@@ -56,7 +73,8 @@ public class HistoryBid {
         this.seller = seller;
     }
 
-    public HistoryBid(String userName, String itemName, String itemType, double bid_price, String end_date, String seller) {
+    public HistoryBid(int id, String userName, String itemName, String itemType, double bid_price, String end_date, String seller) {
+        this.id = id;
         this.userName = userName;
         this.itemName = itemName;
         this.itemType = itemType;

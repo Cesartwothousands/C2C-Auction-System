@@ -65,10 +65,12 @@ public class BargainDao extends Dao{
                 Integer bidnumber = advancedSearchDao.getBidCount(id);
                 String endDate = String.valueOf(rs.getDate("endDate"));
                 String description = rs.getString("description");
-                String seller = rs.getString("seller");
+                String sellerid = rs.getString("seller");
+                ExploreDao exploreDao = new ExploreDao();
+                String sellerName= exploreDao.getSellerName(Integer.parseInt(sellerid));
                 String type = rs.getString("type");
                 tableItem = new TableItem(id, name, initialPrice, currentPrice,
-                        increment, bidnumber, endDate, description, seller, type);
+                        increment, bidnumber, endDate, description, sellerName, type);
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block

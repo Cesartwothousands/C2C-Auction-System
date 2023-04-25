@@ -77,7 +77,7 @@ public class HistoryDao extends Dao{
             String itemType = item.getType().getName();
             String end_date = String.valueOf(item.getEndDate());
             String seller = item.getSeller().getUname();
-            bid.add(new HistoryBid(userName, itemName, itemType,
+            bid.add(new HistoryBid(idItem, userName, itemName, itemType,
                     price, end_date, seller));
         }
     }

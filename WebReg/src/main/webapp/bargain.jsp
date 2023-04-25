@@ -31,13 +31,46 @@
         <div id="myGrid" style="width: 100%; height: 78vh; " class="ag-theme-alpine"></div>
 
         <script>
+            function NameCellRenderer() { }
+
+            NameCellRenderer.prototype.init = function (params) {
+                this.eGui = document.createElement('div');
+                var link = document.createElement('a');
+                var itemId = params.node.data.id;
+                link.href = 'http://localhost:8080/webreg/History/' + itemId;
+                link.innerText = params.value;
+                this.eGui.appendChild(link);
+            };
+
+            NameCellRenderer.prototype.getGui = function () {
+                return this.eGui;
+            };
+
+            function NameCellRenderer2() { }
+
+            NameCellRenderer2.prototype.init = function (params) {
+                this.eGui = document.createElement('div');
+                var link = document.createElement('a');
+                var itemId = params.node.data.id;
+                link.href = 'http://localhost:8080/webreg/AutoBid/' + itemId;
+                link.innerText = params.value;
+                this.eGui.appendChild(link);
+            };
+
+            NameCellRenderer2.prototype.getGui = function () {
+                return this.eGui;
+            };
+
             var columnDefs = [
-                { headerName: "Name", field: "a", sortable: true, flex: 1 },
+                { headerName: "Name", field: "a", sortable: true, flex: 1, cellRenderer: NameCellRenderer },
                 { headerName: "Initial Price", field: "b", sortable: true, flex: 1 },
                 { headerName: "Increment", field: "c", sortable: true, flex: 1 },
                 { headerName: "Current Price", field: "d", sortable: true, flex: 1 },
                 { headerName: "End date", field: "e", sortable: true, flex: 1 },
                 { headerName: "Description", field: "f", sortable: true, flex: 1 },
+                { headerName: "Seller", field: "g", sortable: true, flex: 1 },
+                { headerName: "Type", field: "h", sortable: true, flex: 1 },
+                { headerName: "AutoBid", field: "i", sortable: true, flex: 1, cellRenderer: NameCellRenderer2 }
             ];
 
             // Data
@@ -50,12 +83,16 @@
             // Convert the tableItems object to the format expected by rowData
             var rowData = tableItems.map(function (item) {
                 return {
+                    id: item.id,
                     a: item.name,
                     b: item.initialPrice,
                     c:item.increment,
                     d: item.currentPrice,
                     e: item.endDate,
-                    f: item.description
+                    f: item.description,
+                    g:item.seller,
+                    h:item.type,
+                    i:"AutoBid Entry"
                 };
             });
 
