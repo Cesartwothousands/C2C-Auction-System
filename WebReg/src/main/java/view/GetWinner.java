@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -25,7 +26,9 @@ public class GetWinner extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WinnerDao winnerDao = new WinnerDao();
         // manual member for test
-        Member member = new Member("Gareth Bruce", "123456", "sb@gmail.com");
+        // Member member = new Member("Gareth Bruce", "123456", "sb@gmail.com");
+        HttpSession session = req.getSession(false);
+        Member member = (Member)session.getAttribute("Member");
         List<Winner> winners =  winnerDao.get(member);
 
         //Convert the tableItems to JSON

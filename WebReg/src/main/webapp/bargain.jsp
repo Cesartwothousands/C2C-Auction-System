@@ -10,7 +10,7 @@
 <head>
     <title>Auction Page</title>
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
-    <link rel="stylesheet" href="./style_bargain.css">
+    <link rel="stylesheet" href="../style_bargain.css">
 </head>
 <body>
     <div class="container">

@@ -10,12 +10,9 @@ public class BargainDao extends Dao{
         super();
     }
 
-    public void update(double bidPrice, int itemid){
+    public void update(double bidPrice, int itemid, int idUser){
         // we need to both update users' bidding history and currentPrice.
         Connection con = getConnection();
-
-        //TODO: Connect to the login page to get user's id.
-        int idUser = 1;
 
         String sql1 = "INSERT INTO mydb.bid(idItem, idUser, Price)" +
                 "VALUES(?, ?, ?)";

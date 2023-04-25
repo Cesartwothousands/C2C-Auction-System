@@ -10,7 +10,7 @@
 <head>
     <title>History Record Page</title>
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
-    <link rel="stylesheet" href="./style_history.css">
+    <link rel="stylesheet" href="../style_history.css">
 </head>
 <body>
     <div class = "container">

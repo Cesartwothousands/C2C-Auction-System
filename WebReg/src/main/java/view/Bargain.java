@@ -3,7 +3,9 @@ package view;
 import com.google.gson.Gson;
 import controller.BargainDao;
 import controller.ExploreDao;
+import controller.HistoryDao;
 import model.Item;
+import model.Member;
 import model.TableItem;
 
 import javax.servlet.ServletException;
@@ -18,12 +20,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@WebServlet(value = "/Bargain")
+@WebServlet(value = "/Bargain/*")
 public class Bargain extends HttpServlet {
 
     TableItem tableItem;
     int currentPrice;
-    int itemid;
+    String itemid;
     BargainDao bargainDao;
 
     public Bargain() {
@@ -32,32 +34,25 @@ public class Bargain extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        HttpSession session=request.getSession(false);
-
-        // id = Integer.parseInt(getInitParameter("idItem"));
-        // String pathInfo = request.getRequestURI(); // Get the pathInfo from the request
-        // System.out.println(pathInfo);
-        /**
-         * adjust id manually
-         */
-        itemid = 2;
-        /*if (pathInfo != null) {
-            // id = pathInfo.charAt(1);
-            id = 1;
-        }*/
+        itemid = request.getPathInfo().split("/")[1];
 
         bargainDao = new BargainDao();
-        tableItem = bargainDao.get(itemid);
+        tableItem = bargainDao.get(Integer.parseInt(itemid));
         List<TableItem> tableItems = new ArrayList<>();
         tableItems.add(tableItem);
         // Convert the tableItems list to JSON
         Gson gson = new Gson();
         String tableItemsJson = gson.toJson(tableItems);
         request.setAttribute("tableItemsJson", tableItemsJson);
-        request.getRequestDispatcher("bargain.jsp").forward(request, response);
+        request.getRequestDispatcher("/bargain.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        HttpSession session = request.getSession(false);
+        Member member = (Member)session.getAttribute("Member");
+        String email = member.getEmail();
+        HistoryDao historyDao = new HistoryDao();
+        int idUser = historyDao.getId(email);
         int bidPrice = Integer.parseInt(request.getParameter("bidPrice"));
         String result;
 
@@ -68,7 +63,7 @@ public class Bargain extends HttpServlet {
         }
         else{
             result = "Successful bidding!";
-            bargainDao.update(bidPrice, itemid);
+            bargainDao.update(bidPrice, Integer.parseInt(itemid), idUser);
         }
         response.getWriter().println(result);
     }

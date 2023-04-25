@@ -11,15 +11,15 @@ public class HistoryDao extends Dao{
         super();
     }
 
-    public List<HistoryBid> get(int idUser){
+    public List<HistoryBid> get(int idItem){
         List<HistoryBid> bid = new ArrayList<>();
         Connection con = getConnection();
-        String sql = "SELECT * FROM mydb.bid WHERE idUser = ?";
+        String sql = "SELECT * FROM mydb.bid WHERE idItem = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, idUser);
-            getItem(idUser, bid, ps);
+            ps.setInt(1, idItem);
+            getItem(bid, ps);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -28,7 +28,7 @@ public class HistoryDao extends Dao{
 
     public int getId(String email) {
         String sql = "SELECT idUser FROM mydb.end_user WHERE email = ?";
-        int sellerName = -1;
+        int buyerName = -1;
 
         try (Connection con = getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -36,34 +36,34 @@ public class HistoryDao extends Dao{
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                sellerName = rs.getInt("idUser");
+                buyerName = rs.getInt("idUser");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return sellerName;
+        return buyerName;
     }
 
-    public List<HistoryBid> get(int idUser,String type){
+    public List<HistoryBid> get(String type){
         List<HistoryBid> bid = new ArrayList<>();
         Connection con = getConnection();
-        String sql = "SELECT * FROM mydb.bid WHERE idUser = ? AND idItem in (SELECT idItem FROM mydb.auction WHERE type = ?)";
+        String sql = "SELECT * FROM mydb.bid WHERE idItem in (SELECT idItem FROM mydb.auction WHERE type = ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, idUser);
-            ps.setString(2, type);
-            getItem(idUser, bid, ps);
+            ps.setString(1, type);
+            getItem(bid, ps);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return bid;
     }
 
-    private void getItem(int idUser, List<HistoryBid> bid, PreparedStatement ps) throws SQLException {
+    private void getItem(List<HistoryBid> bid, PreparedStatement ps) throws SQLException {
         ResultSet rs = ps.executeQuery();
         while (rs != null && rs.next()){
+            int idUser = rs.getInt("idUser");
             int idItem = rs.getInt("idItem");
             double price = rs.getDouble("price");
 
