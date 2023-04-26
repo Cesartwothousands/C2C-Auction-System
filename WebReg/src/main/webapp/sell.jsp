@@ -73,7 +73,7 @@
              <br />
              Increment: <input type = "number" name = "increment" />
              <br />
-             Minimum Price (Can leave blank): <input type = "number" name = "minimum price" />
+             Minimum Price : <input type = "number" name = "minimum price" />
              <br />
              Description: <input type = "text" name = "description" />
              <br />

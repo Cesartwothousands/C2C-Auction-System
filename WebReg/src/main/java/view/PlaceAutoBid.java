@@ -35,9 +35,8 @@ public class PlaceAutoBid extends HttpServlet {
         HttpSession session=request.getSession(false);
         Member n=(Member)session.getAttribute("Member");
         int itemId=Integer.parseInt((String) session.getAttribute("itemId"));
-        System.out.println(itemId);
         double upperlimit=Double.parseDouble( request.getParameter("upperlimit"));
         new AutoBidDao().createAutoBid(n,itemId,upperlimit);
-        response.getWriter().println("AutoBid created");
+        response.sendRedirect("/webreg/explore.jsp");
     }
 }

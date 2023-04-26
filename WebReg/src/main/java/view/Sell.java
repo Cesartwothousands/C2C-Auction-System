@@ -64,24 +64,25 @@ public class Sell extends HttpServlet {
                 String property = request.getParameter("property"+count);
                 String descriptionProperty = request.getParameter("description"+count);
                 properties.add(new Property(property, new Type(type), descriptionProperty));
-                System.out.println("property"+count+": "+property+" description: "+descriptionProperty);
+                //System.out.println("property"+count+": "+property+" description: "+descriptionProperty);
                 count++;
             }
             Member member=(Member)session.getAttribute("Member");
             int memberid=new MemberDao().getMemberId(member);
-            System.out.println("memberid: "+memberid);
+            //System.out.println("memberid: "+memberid);
             new ItemDao().insertItem(itemName, Date.valueOf(enddate), Double.parseDouble(initialPrice), Double.parseDouble(increment), Double.parseDouble(minimumPrice), description, memberid,type, properties);
-            System.out.println("itemName: "+itemName+" type: "+type+" initialPrice: "+initialPrice+" enddate: "+enddate+" increment: "+increment+" minimumPrice: "+minimumPrice+" description: "+description);
-            System.out.println("submitform");
+            //System.out.println("itemName: "+itemName+" type: "+type+" initialPrice: "+initialPrice+" enddate: "+enddate+" increment: "+increment+" minimumPrice: "+minimumPrice+" description: "+description);
+            //System.out.println("submitform");
+            response.sendRedirect("/webreg/explore.jsp");
         }else{
             // type submitted, change the property list
             PropertyDao pdao=new PropertyDao();
             List<Type> types =pdao.getAllType();
             String type=request.getParameter("type");
             request.setAttribute("types", types);
-            System.out.println("type: "+type);
+            //System.out.println("type: "+type);
             List<String> typeToProperty=pdao.getPropertyByType(new Type(type));
-            System.out.println("property len: "+typeToProperty.size());
+            //System.out.println("property len: "+typeToProperty.size());
             HttpSession session=request.getSession(false);
             session.setAttribute("type", type);
             request.setAttribute("propertylist", typeToProperty);

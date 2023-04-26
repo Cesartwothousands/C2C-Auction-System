@@ -63,6 +63,6 @@ public class Admin extends HttpServlet {
         String password=request.getParameter("password");
         String email=request.getParameter("email");
         new RepDao().createCustomerRep(uname, email, password);
-        response.getWriter().println("Customer Representative Created");
+        response.sendRedirect("admin.jsp");
     }
 }

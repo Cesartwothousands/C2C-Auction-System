@@ -61,7 +61,7 @@
     %>
     </table>
     Create a new alert:
-    <form action="UserProfile" method="post">
+    <form action="User" method="post">
     <input type="text" name="itemName" />
     <input type="submit" value="Create" />
     </form>
@@ -112,6 +112,7 @@
         <%
         }
         %>
+    </table>
     <h3>item that a higher bid has been placed</h3>
         <table>
             <%
@@ -127,6 +128,7 @@
             <%
             }
             %>
+        </table>
     <h3>someone bids more than your auto bid upper limit</h3>
         <table>
             <%
@@ -142,6 +144,7 @@
             <%
             }
             %>
+        </table>
     <h3>Your winning items</h3>
         <table>
             <%
@@ -155,6 +158,7 @@
             <%
             }
             %>
+        </table>
     <a href="Logout">Click here to logout</a>
 </div>
 </body>
