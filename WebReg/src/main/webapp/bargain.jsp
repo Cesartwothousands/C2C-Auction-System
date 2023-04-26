@@ -24,6 +24,11 @@
                 </tr>
             </table>
         </form>
+        <nav class="nav-container">
+            <ul>
+                <li class="nav-item"><a class="nav-link" href="/webreg/Explore">Home</a></li>
+            </ul>
+        </nav>
     </div>
 
     <div class="container_2">
@@ -84,7 +89,7 @@
             var rowData = tableItems.map(function (item) {
                 return {
                     id: item.id,
-                    a: item.name,
+                    a: item.name + "\n" + "show bid history",
                     b: item.initialPrice,
                     c:item.increment,
                     d: item.currentPrice,

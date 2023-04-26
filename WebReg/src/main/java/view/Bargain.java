@@ -65,7 +65,8 @@ public class Bargain extends HttpServlet {
             result = "Successful bidding!";
             bargainDao.update(bidPrice, Integer.parseInt(itemid), idUser);
         }
-        response.getWriter().println(result);
+        request.setAttribute("result", result);
+        request.getRequestDispatcher("/redirect.jsp").forward(request, response);
     }
 
 }

@@ -17,6 +17,11 @@
         <h2>
             The Auction Winner
         </h2>
+        <nav class="nav-container">
+            <ul>
+                <li class="nav-item"><a class="nav-link" href="/webreg/Explore">Home</a></li>
+            </ul>
+        </nav>
     </div>
     <div class="container_2">
 

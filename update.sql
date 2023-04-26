@@ -1,3 +1,4 @@
+USE mydb;
 delimiter //
 CREATE PROCEDURE ROWPERROW()
 BEGIN
@@ -15,5 +16,6 @@ BEGIN
         END WHILE;
 End;
 ;;
+
 
 CALL ROWPERROW();
