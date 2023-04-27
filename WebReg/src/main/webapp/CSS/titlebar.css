@@ -8,22 +8,12 @@ body {
     min-height: 100vh;
 }
 
-.container {
-    background: rgba(255, 255, 255, 0.25);
-    border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    overflow: hidden;
-    width: 70vw;
-    min-height: 18vh;
-}
 
 .Brand-Search {
     display: flex;
     align-items: center;
+    height: 80px;
+    justify-content: center;
 }
 
 .navbar-brand {
@@ -33,7 +23,7 @@ body {
 
 .search-input {
     width: 30vw;
-    height: 40px;
+    height: 60px;
 }
 
 .search-form {
@@ -41,13 +31,15 @@ body {
 }
 
 .search-button {
-    width: 10vw;
-    height: 40px;
+    width: 8vw;
+    height: 60px;
 }
 
 .ad-search-button {
     width: auto;
-    height: 40px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0);
+    border: 0;
 }
 
 .nav-container {
@@ -77,32 +69,41 @@ ul {
     color: #007bff;
 }
 
-.container_2 {
+.header {
     background: rgba(255, 255, 255, 0.25);
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 0;
     overflow: hidden;
     width: 70vw;
-    min-height: 78vh;
-}
-
-
-.ag-theme-alpine .ag-root-wrapper {
-    --ag-foreground-color: rgb(46, 69, 132);
-    --ag-background-color: rgb(249, 245, 227, 0.5);
-    --ag-header-foreground-color: rgb(204, 245, 172);
-    --ag-header-background-color: rgb(64, 86, 209);
-    --ag-odd-row-background-color: rgb(249, 245, 227, 0.5);
-    --ag-font-size: 16px;
-    --ag-font-family: Times;
-}
-
-.form_group {
+    min-height: 18vh;
     display: flex;
-    flex-direction: row;
-    margin: 10px;
+}
+
+div.seperator {
+    height: 35px;
+}
+
+.container {
+    position: relative !important;
+    transform: none;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container_2 {
+    position: relative;
+    transform: none;
+    left: 0;
+}
+
+.container_3 {
+    position: relative;
+    transform: none;
+    left: 0;
+    bottom: auto;
+    height: auto;
+    overflow: visible;
 }

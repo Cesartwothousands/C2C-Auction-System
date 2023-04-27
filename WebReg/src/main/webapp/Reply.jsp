@@ -11,6 +11,8 @@
         <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="./CSS/titlebar.css">
         <style>
             .custom-bootstrap * {
                 box-sizing: border-box;
@@ -97,6 +99,8 @@
                 </table>
             </div>
         </div>
+
+        <div class="seperator"></div>
 
         <div class="container_2">
 
