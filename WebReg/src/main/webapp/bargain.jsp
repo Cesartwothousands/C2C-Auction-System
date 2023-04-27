@@ -75,7 +75,8 @@
                 { headerName: "Description", field: "f", sortable: true, flex: 1 },
                 { headerName: "Seller", field: "g", sortable: true, flex: 1 },
                 { headerName: "Type", field: "h", sortable: true, flex: 1 },
-                { headerName: "AutoBid", field: "i", sortable: true, flex: 1, cellRenderer: NameCellRenderer2 }
+                { headerName: "Property", field: "i", sortable: true, flex: 1 },
+                { headerName: "AutoBid", field: "j", sortable: true, flex: 1, cellRenderer: NameCellRenderer2 }
             ];
 
             // Data
@@ -97,7 +98,8 @@
                     f: item.description,
                     g:item.seller,
                     h:item.type,
-                    i:"AutoBid Entry"
+                    i:item.property,
+                    j:"AutoBid Entry"
                 };
             });
 
