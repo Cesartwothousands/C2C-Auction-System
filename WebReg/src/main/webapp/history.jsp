@@ -11,6 +11,7 @@
     <title>History Record Page</title>
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
     <link rel="stylesheet" href="../style_history.css">
+    <link rel="stylesheet" href="../CSS/titlebar.css">
 </head>
 <body>
     <div class = "container">
@@ -30,10 +31,14 @@
         <nav class="nav-container">
             <ul>
                 <li class="nav-item"><a class="nav-link" href="/webreg/Explore">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/webreg/Sell">Sell</a></li>
+                <li class="nav-item"><a class="nav-link" href="/webreg/User">User</a></li>
+                <li class="nav-item"><a class="nav-link" href="/webreg/Report">Issues</a></li>
+                <li class="nav-item"><a class="nav-link" href="/webreg">Register/Login</a></li>
             </ul>
         </nav>
     </div>
-
+    <div class="seperator"></div>
     <div class="container_2">
 
         <div id="myGrid" style="width: 100%; height: 78vh; " class="ag-theme-alpine"></div>
