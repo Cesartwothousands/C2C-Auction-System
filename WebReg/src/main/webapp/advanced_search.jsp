@@ -57,32 +57,41 @@
 
         <div class="container_3">
 
+
+
             <form action="/webreg/AdvancedSearch" method="GET" onsubmit="return validateForm();">
+                <div style="display: flex;">
+                    <div style="flex: 1; padding-right: 10px;">
+                        <label for="endDate">End before:</label>
+                        <input type="date" id="endDate" name="endDate"><br>
 
+                        <label for="currentLowPrice">Higher than:</label>
+                        <input type="number" id="currentLowPrice" name="currentLowPrice" step="0.01"><br>
 
-                <label for="endDate">End before:</label>
-                <input type="date" id="endDate" name="endDate"><br>
+                        <label for="itemType">Type:</label>
+                        <input type="text" id="itemType" name="itemType"><br>
 
-                <label for="currentLowPrice">Higher than:</label>
-                <input type="number" id="currentLowPrice" name="currentLowPrice" step="0.01"><br>
+                        <label for="propertyName">Property:</label>
+                        <input type="text" id="propertyName" name="propertyName"><br>
+                    </div>
+                    <div style="flex: 1; padding-left: 10px;">
+                        <label for="currentHighPrice">Lower than:</label>
+                        <input type="number" id="currentHighPrice" name="currentHighPrice" step="0.01"><br>
 
-                <label for="currentHighPrice">Lower than:</label>
-                <input type="number" id="currentHighPrice" name="currentHighPrice" step="0.01"><br>
+                        <label for="bidPrice">Min Increment:</label>
+                        <input type="number" id="bidPrice" name="bidPrice" step="0.01"><br>
 
-                <label for="bidPrice">Min Increment:</label>
-                <input type="number" id="bidPrice" name="bidPrice" step="0.01"><br>
-
-                <label for="itemType">Type:</label>
-                <input type="text" id="itemType" name="itemType"><br>
-
-                <label for="propertyName">Property:</label>
-                <input type="text" id="propertyName" name="propertyName"><br>
-
-                <label for="sellerName">Seller:</label>
-                <input type="text" id="sellerName" name="sellerName"><br>
-
-                <input type="submit" value="Submit">
+                        <label for="sellerName">Seller:</label>
+                        <input type="text" id="sellerName" name="sellerName"><br>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <input type="submit" value="Submit">
             </form>
+        </div>
+
+
+
         </div>
         <div class="seperator"></div>
 

@@ -88,12 +88,13 @@
                 <table width="100%">
                     <tr>
                         <td width="50%">
-                            <h3>Customer Representative Service</h3>
+                            <h1>Customer Representative Service</h1>
                         </td>
                         <td width="50%">
-                            <a href="/webreg/Register">Customer Register</a><br>
-                            <a href="/webreg/Login">Customer Login</a><br>
-                            <a href="/webreg/Logout">Logout</a>
+                            <a href="/webreg/Register" style=' color:black'>Customer
+                                Register</a><br>
+                            <a href="/webreg/Login" style=' color:black'>Customer Login</a><br>
+                            <a href="/webreg/Logout" style=' color:black'>Logout</a>
                         </td>
                     </tr>
                 </table>
@@ -104,9 +105,9 @@
 
         <div class="container_2">
 
-            <a href="/webreg/CRhomepage.jsp">
-                <h2>Customer Representative Homepage</h2>
-            </a><br>
+            <a href="/webreg/CRhomepage.jsp" style='text-decoration:none; color:black'>
+                <h1>Go to Customer Representative Homepage</h1>
+            </a>
 
             <div class="card mt-3">
                 <div class="card-header">

@@ -81,14 +81,12 @@
 
 
     <body>
-
-
         <div class="container">
             <!-- Navigation -->
             <div class="Brand-Search">
 
                 <button class="ad-search-button">
-                    <a href="/webreg/Explore">
+                    <a href="/webreg/Explore" style='text-decoration:none;'>
                         <h1>
                             C2C Auction System!
                         </h1>
@@ -98,25 +96,27 @@
                 <form class="search-form" action="/webreg/Search" method="GET">
                     <input class="search-input" type="search" name="query" placeholder="Search Everything You Want"
                         aria-label="Search">
-                    <button class="search-button" type="submit">Search</button>
+                    <button class="search-button" type="submit">
+                        <h3>Search</h3>
+                    </button>
                 </form>
 
-                <button class="ad-search-button">
-                    <a href="/webreg/AdvancedSearch">Advanced</a>
-                </button>
             </div>
 
             <nav class="nav-container">
                 <ul>
                     <li class="nav-item"><a class="nav-link" href="/webreg/Explore">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/webreg/">Watch List</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/webreg/">Sell Items</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/webreg/">Settings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/webreg/Sell">Sell</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/webreg/User">User</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/webreg/Report">Issues</a></li>
                     <li class="nav-item"><a class="nav-link" href="/webreg">Register/Login</a></li>
                 </ul>
             </nav>
+
         </div>
         <div class="seperator"></div>
+
+
 
         <div class="container_2">
             <!-- Collapsible toggle for the form -->
@@ -137,12 +137,12 @@
                         <form id="addQuestionForm" method="POST" action="/webreg/Report"
                             onsubmit="return submitQuestion();">
                             <div class="mb-3">
-                                <label for="questionTitle" class="form-label">Question Title</label>
+                                <label for="questionTitle" class="form-label">Issue Title</label>
                                 <input type="text" class="form-control" name="questionTitle" id="questionTitle"
                                     required>
                             </div>
                             <div class="mb-3">
-                                <label for="questionContent" class="form-label">Question Content</label>
+                                <label for="questionContent" class="form-label">Issue Content</label>
                                 <textarea class="form-control" name="questionContent" id="questionContent" rows="4"
                                     required></textarea>
                             </div>
@@ -207,7 +207,7 @@
                         <div class="card issue-card">
                             <div class="card-header d-flex justify-content-between" id="questionHeading${uniqueId}">
                                 <div>
-                                    <h5 class="card-title d-inline mb-0" id="uniqueId${uniqueId}"> Question[${uniqueId}]: ${data.questionTitle}</h5>
+                                    <h5 class="card-title d-inline mb-0" id="uniqueId${uniqueId}"> Issue[${uniqueId}]: ${data.questionTitle}</h5>
                                     <span class="badge ${hasAnswerProvided ? 'bg-success' : 'bg-danger'} ms-2">${hasAnswered}</span>
                                 </div>
                                 <button class="btn btn-link text-decoration-none" type="button" data-bs-toggle="collapse"
