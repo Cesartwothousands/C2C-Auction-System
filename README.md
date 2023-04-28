@@ -84,3 +84,17 @@ Browser4
 ## CZH
 Browser1-3 67
 Customer Rep
+
+## How to Use
+
+- Run Insert.sql with your local mysql database.
+- Change the connection url and password in `WebReg\src\main\java\controller\DBConfig.java` to your url and password. 
+- If you do not have maven installed in your computer, install maven. See https://maven.apache.org/install.html.
+- Run the following code in command line with the project base directory:
+    ```
+    cd WebReg
+    mvn install
+    mvn complie
+    mvn tomcat7:run
+    ```
+- visit the website at http://localhost:8080/webreg/
