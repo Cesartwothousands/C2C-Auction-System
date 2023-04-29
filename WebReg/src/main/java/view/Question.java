@@ -93,7 +93,7 @@ public class Question extends HttpServlet {
         // Convert the tableItems list to JSON
         Gson gson = new Gson();
         String questionItemsJson = gson.toJson(questionItems);
-        System.out.println("Generated JSON: " + questionItemsJson);
+        //System.out.println("Generated JSON: " + questionItemsJson);
 
         request.setAttribute("QuestionTable", questionItemsJson);
         request.getRequestDispatcher("report.jsp").forward(request, response);

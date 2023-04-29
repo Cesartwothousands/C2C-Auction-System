@@ -68,7 +68,7 @@ public class BargainDao extends Dao{
                 String description = rs.getString("description");
                 String sellerid = rs.getString("seller");
                 String propertyName = rs.getString("pName");
-                System.out.println(propertyName);
+                //System.out.println(propertyName);
                 ExploreDao exploreDao = new ExploreDao();
                 String sellerName= exploreDao.getSellerName(Integer.parseInt(sellerid));
                 String type = rs.getString("type");

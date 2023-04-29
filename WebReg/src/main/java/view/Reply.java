@@ -85,7 +85,7 @@ public class Reply extends HttpServlet {
         // Convert the tableItems list to JSON
         Gson gson = new Gson();
         String questionItemsJson = gson.toJson(questionItems);
-        System.out.println("Generated JSON: " + questionItemsJson);
+        //System.out.println("Generated JSON: " + questionItemsJson);
 
         request.setAttribute("QuestionTable", questionItemsJson);
         request.getRequestDispatcher("Reply.jsp").forward(request, response);

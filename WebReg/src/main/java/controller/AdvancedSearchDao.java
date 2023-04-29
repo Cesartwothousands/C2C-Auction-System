@@ -51,7 +51,7 @@ public class AdvancedSearchDao extends Dao {
             sql.append(String.join(" AND", conditions));
         }
 
-        System.out.println("Executing SQL query: " + sql.toString());
+        //System.out.println("Executing SQL query: " + sql.toString());
 
         if (itemType != null) {
             try {
@@ -80,7 +80,7 @@ public class AdvancedSearchDao extends Dao {
                     ps.setString(index++, sellerName);
                 }
 
-                System.out.println("Executing SQL query: " + ps);
+                //System.out.println("Executing SQL query: " + ps);
                 ResultSet rs = ps.executeQuery();
 
                 while (rs != null && rs.next()) {

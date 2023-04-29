@@ -34,7 +34,7 @@ public class GetWinner extends HttpServlet {
         //Convert the tableItems to JSON
         Gson gson = new Gson();
         String winnerJson = gson.toJson(winners);
-        System.out.println(winnerJson);
+        //System.out.println(winnerJson);
         req.setAttribute("winnerJson", winnerJson);
         req.getRequestDispatcher("winner.jsp").forward(req, resp);
     }

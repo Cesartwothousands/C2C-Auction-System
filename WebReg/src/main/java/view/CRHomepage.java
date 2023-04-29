@@ -67,7 +67,7 @@ public class CRHomepage extends HttpServlet {
                 result = dao.deleteAuction(idItem);
             }
         }
-        System.out.println(result);
+        //System.out.println(result);
         request.setAttribute("result", result);
         request.getRequestDispatcher("CRhomepage.jsp").forward(request, response);
     }

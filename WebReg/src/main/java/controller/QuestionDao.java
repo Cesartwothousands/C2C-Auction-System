@@ -49,7 +49,7 @@ public class QuestionDao extends Dao {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, query);
-            System.out.println(query);
+            //System.out.println(query);
             ResultSet rs = ps.executeQuery();
 
             while (rs != null && rs.next()) {

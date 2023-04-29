@@ -3,9 +3,9 @@
 
 function deleteRow(){
    console.log('deleting row...');
-   var len=$('#dataAdd .container .form-row').length;
+   var len=$('#dataAdd .subcontainer .form-row').length;
    if(len>1){
-   $("#dataAdd .container .form-row").last().remove();
+   $("#dataAdd .subcontainer .form-row").last().remove();
    }else{
    alert('Not able to Delete');
    }

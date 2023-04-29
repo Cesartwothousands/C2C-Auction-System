@@ -35,7 +35,7 @@
 
         <div class="container_2">
 
-            <a href="/webreg/Reply" style='text-decoration:none; color:black'>
+            <a href="/webreg/Reply" style='color:black'>
                 <h1>Go to Reply Issues</h1>
             </a>
 

@@ -105,7 +105,7 @@
 
         <div class="container_2">
 
-            <a href="/webreg/CRhomepage.jsp" style='text-decoration:none; color:black'>
+            <a href="/webreg/CRhomepage.jsp" style='color:black'>
                 <h1>Go to Customer Representative Homepage</h1>
             </a>
 
