@@ -21,7 +21,7 @@ public class AdminDao extends Dao{
     }
     public HashMap<String,Double> earningsPerItem(){
         Connection con = getConnection();
-        String sql = " select name,sum(currentprice) from (select * from mydb.auction where currentprice >= minimumprice and enddate>= CURDATE()) as t group by name;";
+        String sql = " select name,sum(currentprice) from (select * from mydb.auction where currentprice >= minimumprice and enddate< CURDATE()) as t group by name;";
         HashMap<String,Double> result=new HashMap<>();
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -38,7 +38,7 @@ public class AdminDao extends Dao{
     }
     public HashMap<String,Double> earningsPerType(){
         Connection con = getConnection();
-        String sql = " select type,sum(currentprice) from (select * from mydb.auction where currentprice >= minimumprice and enddate>= CURDATE()) as t group by type;";
+        String sql = " select type,sum(currentprice) from (select * from mydb.auction where currentprice >= minimumprice and enddate< CURDATE()) as t group by type;";
         HashMap<String,Double> result=new HashMap<>();
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class AdminDao extends Dao{
     public HashMap<String,Double> earningsPerSeller(){
         Connection con = getConnection();
         //seller is an int type foreign key to member table
-        String sql = " select seller,sum(currentprice) from (select * from mydb.auction where currentprice >= minimumprice and enddate>= CURDATE()) as t group by seller;";
+        String sql = " select seller,sum(currentprice) from (select * from mydb.auction where currentprice >= minimumprice and enddate< CURDATE()) as t group by seller;";
         HashMap<String,Double> result=new HashMap<>();
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -75,7 +75,7 @@ public class AdminDao extends Dao{
     }
     public Double totalEarnings(){
         Connection con = getConnection();
-        String sql = " select sum(currentprice) from (select * from mydb.auction where currentprice >= minimumprice and enddate>= CURDATE()) as t;";
+        String sql = " select sum(currentprice) from (select * from mydb.auction where currentprice >= minimumprice and enddate< CURDATE()) as t;";
         double result=0.0;
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -91,7 +91,7 @@ public class AdminDao extends Dao{
     public Item bestSellingItems(){
         Connection con = getConnection();
         String sql = "select idItem,max(cur_price) from " +
-                "(select idItem,sum(currentprice) as cur_price from (select * from mydb.auction where currentprice >= minimumprice and enddate>= CURDATE()) as t group by idItem) as a group by idItem;";
+                "(select idItem,sum(currentprice) as cur_price from (select * from mydb.auction where currentprice >= minimumprice and enddate< CURDATE()) as t group by idItem) as a group by idItem;";
         Item result=null;
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -108,7 +108,7 @@ public class AdminDao extends Dao{
     }
     //return a list with length 2, the first is the member object, the second is the total spending
     public List<Object> bestBuyer(){
-        String selledItems="select idItem,currentPrice from mydb.auction where currentprice >= minimumprice and enddate>= CURDATE()";
+        String selledItems="select idItem,currentPrice from mydb.auction where currentprice >= minimumprice and enddate< CURDATE()";
         String buyerId="select idUser,price from mydb.bid join ("+selledItems+") as t on bid.idItem=t.idItem where bid.price=t.currentPrice";
         String buyerSpending="select A.idUser,sum(price) as price from mydb.end_user join ("+buyerId+") as A on end_user.idUser=A.idUser group by idUser";
         String bestBuyer="select idUser,max(price) from ("+buyerSpending+") as B group by idUser";

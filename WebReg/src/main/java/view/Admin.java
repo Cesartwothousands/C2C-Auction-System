@@ -37,6 +37,7 @@ public class Admin extends HttpServlet {
         HashMap<String, Double> itemEarnings = adminDao.earningsPerItem();
         HashMap<String, Double> typeEarnings = adminDao.earningsPerType();
         HashMap<String, Double> sellerEarnings = adminDao.earningsPerSeller();
+        System.out.printf("%d %d %d ",sellerEarnings.size(),itemEarnings.size(),typeEarnings.size());
         Double totalEarnings = adminDao.totalEarnings();
         Item item = adminDao.bestSellingItems();
         List<Object> result=adminDao.bestBuyer();

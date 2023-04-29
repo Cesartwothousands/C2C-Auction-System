@@ -81,6 +81,16 @@ public class CRHomepageDao extends Dao {
         try (Connection con = getConnection()) {
             con.setAutoCommit(false); // Start transaction
 
+            String sql0 = "DELETE FROM mydb.autobid WHERE idItem = ?;";
+            try(PreparedStatement ps = con.prepareStatement(sql0)) {
+                ps.setInt(1, idItem);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                con.rollback(); // Rollback transaction
+                return "Error";
+            }
+
             String sql = "DELETE FROM mydb.bid WHERE idItem = ?;";
             try (PreparedStatement ps = con.prepareStatement(sql)) {
                 ps.setInt(1, idItem);
