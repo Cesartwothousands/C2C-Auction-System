@@ -18,7 +18,8 @@
 --
 -- Table structure for table `administrative_stuff`
 --
-
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
 DROP TABLE IF EXISTS `administrative_stuff`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
