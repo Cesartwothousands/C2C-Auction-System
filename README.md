@@ -92,7 +92,6 @@ Customer Rep
 - Run the following code in command line with the project base directory:
     ```
     cd WebReg
-    mvn install
     mvn complie
     mvn tomcat7:run
     ```

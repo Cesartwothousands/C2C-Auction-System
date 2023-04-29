@@ -12,7 +12,7 @@ public class RepDao extends Dao{
     }
     public void createCustomerRep(String name,String email,String password){
         Connection con = getConnection();
-        String sql = "insert into mydb.representatives (name,email,password) values(?,?,?)";
+        String sql = "insert into mydb.representatives (username,email,password) values(?,?,?)";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1,name);
