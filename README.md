@@ -1,74 +1,75 @@
 # C2C-Auction-System
 
-## Checking List
-
-- [ ] **Insert URL on each page**
-
-- [x] Create accounts of users; 
-    - [x] login
-    - [x] logout.
-    
-### I. Auctions
-- [x] seller creates auctions and posts items for sale (WYT)
-    - [x] set all the characteristics of the item
-    - [x] set closing date and time
-    - [x] set a hidden minimum price (reserve)
-
+# Checklist
+## -1. Initialize
+## 0. Accounts
+- [ ] Create accounts of users;
+- http://localhost:8080/webreg/
+- [ ] Login, logout.
+- http://localhost:8080/webreg/Login
+- http://localhost:8080/webreg/Logout
+## 1. Auctions
+- [ ] seller creates auctions and posts items for sale
+    - [ ] set all the characteristics of the item
+    - [ ] set closing date and time
+    - [ ] set a hidden minimum price (reserve)
+- http://localhost:8080/webreg/Sell
 - [ ] a buyer should be able to bid
-    - [x] let the buyer set a new bid  XQP
+    - [ ] let the buyer set a new bid
     - [ ] in case of automatic bidding set secret upper limit and bid increment
-    - [x] alert other buyers of the item that a higher bid has been placed (manual)
-    - [x] alert buyers in case someone bids more than their upper limit (automatic)
+    - [ ] alert other buyers of the item that a higher bid has been placed (manual)
+    - [ ] alert buyers in case someone bids more than their upper limit (automatic)
+- http://localhost:8080/webreg/Bargain/<int:itemId>
+- http://localhost:8080/webreg/autobid.jsp
 
-- [ ] define the winner of the auction XQP
-    - [x] when the closing time has come, check if the seller has set a reserve
-        - [x] if yes: if the reserve is higher than the last bid none is the winner.
-        - [x] if no: whoever has the higher bid is the winner
-            - [ ] alert the winner that they won the auction
+- [ ]  define the winner of the auction
+    - [ ] when the closing time has come, check if the seller has set a reserve
+    - [ ]  if yes: if the reserve is higher than the last bid none is the winner.
+    - [ ] if no: whoever has the higher bid is the winner
+        - [ ] alert the winner that they won the auction
+- http://localhost:8080/webreg/User
 
-### II. Browsing and advanced search functionality
-- [x] <u>let people browse on the items</u> and see the status of the current bidding (Precisly Bidding) (CZH) ??
-- [x] sort by different criteria (by type, bidding price etc.) (Make Property in it) (CZH)
-- [x] search the list of items by various criteria. (CZH)
-    current price, auction enddate, bid price, item type, property name, seller name, (CZH)
+## 2. Browsing and advanced search functionality
+- [ ] let people browse on the items and see the status of the current bidding
+- [ ] sort by different criteria (by type, bidding price etc.)
+- [ ] search the list of items by various criteria.
+- [ ] a user should be able to:
+    - [ ] view all the history of bids for any specific auction
+    - [ ] view the list of all auctions a specific buyer or seller has participated in
+    - [ ] view the list of "similar" items on auctions in the preceding month (and auction information about them)
+    - [ ] let user set an alert for specific items s/he is interested
+        - [ ] get an alert when the item becomes available
+    - [ ] users browse questions and answers
+    - [ ] users search questions by keywords
+- http://localhost:8080/webreg/Explore
+- http://localhost:8080/webreg/Search?query=<string:query>
+- http://localhost:8080/webreg/AdvancedSearch
+- http://localhost:8080/webreg/AdvancedSearch?query=<string:query>
+- http://localhost:8080/webreg/Report
+- http://localhost:8080/webreg/Report?query=<string:query>
+- http://localhost:8080/webreg/History/<string:query>
 
-	- [x] a user should be able to:
-    - [x] view all the history of bids for any specific auction  XQP
-    - [x] view the list of all auctions a specific buyer or seller has participated in XQP
-	TODO:
-    - [x] view the list of "similar" items on auctions in the preceding month (and auction information about them) XQP
-- [x] let user set an alert for specific items s/he is interested (WYT)
-    - [x] get an alert when the item becomes available
-
-Discussion board
-- [x] users browse questions and answers (CZH)
-- [x] users search questions by keywords (CZH)
-
-### III. Admin and customer rep functions
-- [x] Admin (create an admin account ahead of time) (WYT)
-    - [x] creates accounts for customer representatives
-    - [x] generates sales reports for:
-        - [x] total earnings
-        - [x] earnings per:
-            - [x] item
-            - [x] item type
-            - [x] end-user
-        - [x] best-selling items
-        - [x] best buyers
-- [x] Customer representative functions:
-
-    - [x] users post questions to the customer representatives (i.e. customer service) (CZH)
-    - [x] reps reply to user questions (CZH)
-    - [x] edits and deletes account information (CZH)
-    - [x] removes bids (CZH)
-    - [x] removes auctions (CZH)
-- [x] Custom representative login (WYT)
-
------
-
-- [ ] Sample Data
-- [ ] Insert Data
-
+## 3. Admin and customer rep functions
+- [ ] Admin (create an admin account ahead of time)
+    - [ ] creates accounts for customer representatives
+    - [ ] generates sales reports for:
+        - [ ] total earnings
+        - [ ] earnings per: 
+            - [ ] item
+            - [ ] item type
+            - [ ] end-user
+    - [ ] best-selling items
+    - [ ] best buyers
+- http://localhost:8080/webreg/Admin
+- [ ] Customer representative functions:
+    - [ ] users post questions to the customer representatives (i.e. customer service)
+    - [ ] reps reply to user questions
+    - [ ] edits and deletes account information
+    - [ ] removes bids 
+    - [ ] removes auctions
+- http://localhost:8080/webreg/CRHomepage
+- http://localhost:8080/webreg/Reply
+- http://localhost:8080/webreg/Reply?query=<string:query>
 -----
 ## WYT
 Auction Seller 
