@@ -3,7 +3,7 @@ package controller;
 public class DBConfig {
     private final String user = "root";
     private final String url = "jdbc:mysql://localhost:3306/mydb";
-    private final String password = "15768829916";
+    private final String password = "3042127359@qq.com";
     private final String dbdriver = "com.mysql.cj.jdbc.Driver";
 
     public DBConfig() {

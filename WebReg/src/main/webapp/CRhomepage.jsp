@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Explore Page</title>
+        <title>Customer Representative Page</title>
         <link rel="stylesheet" href="./style_CRhomepage.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
