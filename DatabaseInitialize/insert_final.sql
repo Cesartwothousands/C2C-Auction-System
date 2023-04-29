@@ -39,6 +39,7 @@ LOCK TABLES `administrative_stuff` WRITE;
 /*!40000 ALTER TABLE `administrative_stuff` ENABLE KEYS */;
 UNLOCK TABLES;
 
+insert into mydb.administrative_stuff (username,email,password) values ('Admin','admin@example.com','adminPassword');
 --
 -- Table structure for table `alert`
 --
