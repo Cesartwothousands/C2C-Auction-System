@@ -76,19 +76,48 @@ public class CRHomepageDao extends Dao {
     }
 
     public String deleteAuction(Integer idItem) {
-        String sql = "DELETE FROM mydb.auction WHERE idItem = ?;";
         String result;
 
-        try (Connection con = getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, idItem);
+        try (Connection con = getConnection()) {
+            con.setAutoCommit(false); // Start transaction
 
-            int affectedRows = ps.executeUpdate();
+            String sql = "DELETE FROM mydb.bid WHERE idItem = ?;";
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setInt(1, idItem);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                con.rollback(); // Rollback transaction
+                return "Error";
+            }
 
-            if (affectedRows == 0) {
+            String sql2 = "DELETE FROM mydb.itemProperty WHERE idItem = ?;";
+            try (PreparedStatement ps = con.prepareStatement(sql2)) {
+                ps.setInt(1, idItem);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                con.rollback(); // Rollback transaction
+                return "Error";
+            }
+
+            String sql3 = "DELETE FROM mydb.auction WHERE idItem = ?;";
+            try (PreparedStatement ps = con.prepareStatement(sql3)) {
+                ps.setInt(1, idItem);
+
+                int affectedRows = ps.executeUpdate();
+
+                if (affectedRows == 0) {
+                    con.rollback(); // Rollback transaction
+                    result = "Error";
+                } else {
+                    con.commit(); // Commit transaction
+                    result = "Success";
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                con.rollback(); // Rollback transaction
                 result = "Error";
-            } else {
-                result = "Sucess";
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,5 +126,4 @@ public class CRHomepageDao extends Dao {
 
         return result;
     }
-
 }

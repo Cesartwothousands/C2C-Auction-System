@@ -23,9 +23,7 @@
                             <h1>Customer Representative Service</h1>
                         </td>
                         <td width="50%">
-                            <a href="/webreg/Register" style=' color:black'>Customer
-                                Register</a><br>
-                            <a href="/webreg/Login" style=' color:black'>Customer Login</a><br>
+                            <a href="/webreg/CRLogin" style=' color:black'>Customer Representative Login</a><br>
                             <a href="/webreg/Logout" style=' color:black'>Logout</a>
                         </td>
                     </tr>
