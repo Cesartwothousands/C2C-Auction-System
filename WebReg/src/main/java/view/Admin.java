@@ -63,6 +63,28 @@ public class Admin extends HttpServlet {
         String password=request.getParameter("password");
         String email=request.getParameter("email");
         new RepDao().createCustomerRep(uname, email, password);
-        response.sendRedirect("admin.jsp");
+        AdminDao adminDao = new AdminDao();
+        //check if the visitor is admin
+        //Member n=(Member)session.getAttribute("Member");
+        HashMap<String, Double> itemEarnings = adminDao.earningsPerItem();
+        HashMap<String, Double> typeEarnings = adminDao.earningsPerType();
+        HashMap<String, Double> sellerEarnings = adminDao.earningsPerSeller();
+        Double totalEarnings = adminDao.totalEarnings();
+        Item item = adminDao.bestSellingItems();
+        List<Object> result=adminDao.bestBuyer();
+        Member bestBuyer=null;
+        Double bestBuyerSpending=null;
+        if(result.size()>0){
+            bestBuyer=(Member)result.get(0);
+            bestBuyerSpending=(Double)result.get(1);
+        }
+        request.setAttribute("itemEarnings", itemEarnings);
+        request.setAttribute("typeEarnings", typeEarnings);
+        request.setAttribute("sellerEarnings", sellerEarnings);
+        request.setAttribute("totalEarnings", totalEarnings);
+        request.setAttribute("item", item);
+        request.setAttribute("bestBuyer", bestBuyer);
+        request.setAttribute("bestBuyerSpending", bestBuyerSpending);
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 }

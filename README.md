@@ -6,7 +6,6 @@
 
 - [x] Create accounts of users; 
     - [x] login
-    之后发生什么
     - [x] logout.
     
 ### I. Auctions
@@ -18,7 +17,6 @@
 - [ ] a buyer should be able to bid
     - [x] let the buyer set a new bid  XQP
     - [ ] in case of automatic bidding set secret upper limit and bid increment
-    THIS alert 追踪购买情况
     - [x] alert other buyers of the item that a higher bid has been placed (manual)
     - [x] alert buyers in case someone bids more than their upper limit (automatic)
 
@@ -93,7 +91,6 @@ Customer Rep
 - Run the following code in command line with the project base directory:
     ```
     cd WebReg
-    mvn install
     mvn complie
     mvn tomcat7:run
     ```
