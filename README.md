@@ -92,7 +92,7 @@ Customer Rep
 - Run the following code in command line with the project base directory:
     ```
     cd WebReg
-    mvn complie
+    mvn compile
     mvn tomcat7:run
     ```
 - visit the website at http://localhost:8080/webreg/
