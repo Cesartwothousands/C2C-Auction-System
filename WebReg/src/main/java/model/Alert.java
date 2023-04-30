@@ -1,13 +1,12 @@
 package model;
 
-import java.util.List;
-
 public class Alert {
     private int id;
 
     private Member user;
     private String itemName;
-    public Alert(int id,Member user, String itemName) {
+
+    public Alert(int id, Member user, String itemName) {
         super();
         this.id = id;
         this.user = user;
